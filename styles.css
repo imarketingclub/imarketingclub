@@ -1851,7 +1851,7 @@ body.join-page {
   max-width: 1080px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 5%;
+  padding: 32px 5% 40px;
   align-items: start;
   position: relative;
   z-index: 1;
