@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="logo.webp">
 <meta name="theme-color" content="#0f0e0d">
 <meta name="description" content="iMarketing Club Earnings Disclaimer — results are not typical.">
 <meta property="og:type" content="website">
@@ -21,8 +22,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Earnings Disclaimer — iMarketing Club</title>
 
-<!-- FIX 1: Preconnect kept, but font URL deduped (removed duplicate display=swap) and preload removed
-     to avoid render-blocking. Fonts load async via print trick. -->
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"
@@ -32,7 +31,6 @@
 </noscript>
 
 <style>
-  /* FIX 2: font-display swap declared explicitly for fallback fonts during async load */
   @font-face {
     font-family: 'DM Sans Fallback';
     src: local('Arial');
