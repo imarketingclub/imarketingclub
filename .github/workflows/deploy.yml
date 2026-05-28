@@ -15,9 +15,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install lftp
-        run: sudo apt-get install -y lftp
-
       - name: Deploy via FTP
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
@@ -26,7 +23,21 @@ jobs:
           FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
         run: |
           SERVER=$(echo "$FTP_SERVER" | tr -d '[:space:]' | sed 's|^ftps\?://||' | sed 's|/$||')
-          DIR=$(echo "$FTP_SERVER_DIR" | tr -d '[:space:]' | sed 's|/$||')
-          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" \
-            -e "set ftp:ssl-allow no; set ftp:passive-mode true; set net:timeout 30; set net:max-retries 2; mirror --reverse --delete --verbose --exclude-glob .git/ --exclude-glob .github/ . /$DIR; bye" \
-            ftp://$SERVER
+          DIR=$(echo "$FTP_SERVER_DIR" | tr -d '[:space:]' | sed 's|^/||' | sed 's|/$||')
+          find . -type f \
+            ! -path './.git/*' \
+            ! -path './.github/*' \
+            ! -name '.gitignore' \
+            | while IFS= read -r file; do
+              remote="${file#./}"
+              echo "Uploading: $remote"
+              curl --silent --show-error \
+                --ftp-pasv \
+                --ftp-create-dirs \
+                --connect-timeout 30 \
+                --max-time 120 \
+                -u "$FTP_USERNAME:$FTP_PASSWORD" \
+                -T "$file" \
+                "ftp://$SERVER/$DIR/$remote"
+            done
+          echo "Deploy complete."
