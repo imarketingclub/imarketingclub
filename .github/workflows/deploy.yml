@@ -15,6 +15,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install lftp
+        run: sudo apt-get install -y lftp
+
       - name: Deploy via FTP
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
@@ -24,20 +27,30 @@ jobs:
         run: |
           SERVER=$(echo "$FTP_SERVER" | tr -d '[:space:]' | sed 's|^ftps\?://||' | sed 's|/$||')
           DIR=$(echo "$FTP_SERVER_DIR" | tr -d '[:space:]' | sed 's|^/||' | sed 's|/$||')
-          find . -type f \
-            ! -path './.git/*' \
-            ! -path './.github/*' \
-            ! -name '.gitignore' \
-            | while IFS= read -r file; do
-              remote="${file#./}"
-              echo "Uploading: $remote"
-              curl --silent --show-error \
-                --ftp-pasv \
-                --ftp-create-dirs \
-                --connect-timeout 30 \
-                --max-time 120 \
-                -u "$FTP_USERNAME:$FTP_PASSWORD" \
-                -T "$file" \
-                "ftp://$SERVER/$DIR/$remote"
-            done
+
+          # Build lftp script: one connection, mkdir + put per file
+          SCRIPT=$(mktemp)
+          {
+            echo "set ftp:ssl-allow no"
+            echo "set ftp:passive-mode true"
+            echo "set net:timeout 60"
+            echo "open -u \"$FTP_USERNAME\",\"$FTP_PASSWORD\" ftp://$SERVER"
+            find . -type f \
+              ! -path './.git/*' \
+              ! -path './.github/*' \
+              ! -name '.gitignore' \
+              | while IFS= read -r file; do
+                remote="${file#./}"
+                dir=$(dirname "$remote")
+                echo "mkdir -p /$DIR/$dir"
+                echo "put $file -o /$DIR/$remote"
+              done
+            echo "bye"
+          } > "$SCRIPT"
+
+          echo "--- lftp script preview (first 20 lines) ---"
+          head -20 "$SCRIPT"
+          echo "---------------------------------------------"
+
+          lftp -f "$SCRIPT"
           echo "Deploy complete."
