@@ -249,19 +249,12 @@ form.addEventListener('submit', async function(e) {
     });
 
     if (response.ok) {
-      // If opted in, add to GetResponse list via REST API v3
+      // If opted in, add to GetResponse list via server-side proxy
       if (optin.checked) {
-        fetch('https://api.getresponse.com/v3/contacts', {
+        fetch('/subscribe.php', {
           method: 'POST',
-          headers: {
-            'X-Auth-Token': 'api-key shfgo3ma4dsb7umj76u0mvv8c6osqi30',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            email: em.value.trim(),
-            name: fullName,
-            campaign: { campaignId: '490060604' }
-          })
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: em.value.trim(), name: fullName })
         }).catch(function() {});
       }
       form.style.display = 'none';
