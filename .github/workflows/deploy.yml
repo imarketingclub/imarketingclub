@@ -23,14 +23,6 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
         run: |
-          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://$FTP_SERVER" <<EOF
-            set ssl:verify-certificate false
-            set ftp:ssl-allow yes
-            mirror --reverse --delete \
-              --exclude ^\.git/ \
-              --exclude ^\.github/ \
-              --exclude ^README\.md\$ \
-              --exclude ^LICENSE\$ \
-              . $FTP_SERVER_DIR
-            bye
-          EOF
+          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" \
+            -e "set ssl:verify-certificate false; set ftp:ssl-allow yes; mirror --reverse --delete --exclude ^\.git/ --exclude ^\.github/ --exclude ^README\.md --exclude ^LICENSE . $FTP_SERVER_DIR; bye" \
+            ftp://$FTP_SERVER
