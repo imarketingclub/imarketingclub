@@ -2,5 +2,7 @@
 deployment:
   tasks:
     - export DEPLOYPATH=$HOME/public_html/
-    - /bin/cp -rp . $DEPLOYPATH
+    - /bin/cp -r . $DEPLOYPATH
     - /bin/rm -rf $DEPLOYPATH/.git $DEPLOYPATH/.github $DEPLOYPATH/.cpanel.yml
+    - /bin/find $DEPLOYPATH -maxdepth 3 -type f -exec chmod 644 {} \;
+    - /bin/find $DEPLOYPATH -maxdepth 3 -type d -exec chmod 755 {} \;
