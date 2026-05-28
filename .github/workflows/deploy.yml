@@ -18,27 +18,6 @@ jobs:
       - name: Install lftp
         run: sudo apt-get install -y lftp
 
-      - name: Check secrets are set
-        env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
-        run: |
-          [ -n "$FTP_SERVER" ]    && echo "FTP_SERVER: set"    || echo "FTP_SERVER: EMPTY"
-          [ -n "$FTP_USERNAME" ]  && echo "FTP_USERNAME: set"  || echo "FTP_USERNAME: EMPTY"
-          [ -n "$FTP_PASSWORD" ]  && echo "FTP_PASSWORD: set"  || echo "FTP_PASSWORD: EMPTY"
-          [ -n "$FTP_SERVER_DIR" ] && echo "FTP_SERVER_DIR: set" || echo "FTP_SERVER_DIR: EMPTY"
-
-      - name: Test port 21
-        env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-        run: |
-          echo "Testing port 21 on $FTP_SERVER..."
-          timeout 10 bash -c "echo > /dev/tcp/$FTP_SERVER/21" \
-            && echo "Port 21: OPEN" \
-            || echo "Port 21: CLOSED or unreachable"
-
       - name: Deploy via FTP
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
@@ -46,11 +25,8 @@ jobs:
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
         run: |
-          # Sanitise server value: strip protocol prefix, spaces, trailing slashes
           SERVER=$(echo "$FTP_SERVER" | tr -d '[:space:]' | sed 's|^ftps\?://||' | sed 's|/$||')
-          echo "FTP_SERVER length: ${#SERVER}"
-          echo "Resolving hostname..."
-          host "$SERVER" || nslookup "$SERVER" || echo "DNS lookup failed for: $SERVER"
+          DIR=$(echo "$FTP_SERVER_DIR" | tr -d '[:space:]' | sed 's|/$||')
           lftp -u "$FTP_USERNAME","$FTP_PASSWORD" \
-            -e "set ssl:verify-certificate false; set ftp:ssl-allow yes; put index.html -o /test_write_check.txt; ls -la test_write_check.txt; bye" \
+            -e "set ssl:verify-certificate false; set ftp:ssl-allow yes; mirror --reverse --delete --verbose . /$DIR; bye" \
             ftp://$SERVER
