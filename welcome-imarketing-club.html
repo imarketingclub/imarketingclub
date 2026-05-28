@@ -2,6 +2,7 @@
 <html lang="en-AU">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="styles.css">
 <link rel="icon" href="logo.webp">
 <meta name="theme-color" content="#0f0e0d">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,89 +81,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap"></noscript>
-<style>
-  :root {
-    --ink: #0f0e0d;
-    --cream: #faf7f2;
-    --gold: #c9963a;
-    --gold-light: #e8b84b;
-    --rust: #b84a2b;
-    --mid: #6b6560;
-    --border: #e0d9d0;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
 
-  nav { position: sticky; top: 0; z-index: 100; background: var(--ink); padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 64px; border-bottom: 2px solid var(--gold); }
-  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.05em; color: var(--gold); text-decoration: none; }
-  .nav-logo span { color: #fff; }
-  .nav-i { color: var(--gold) !important; font-size: 1.3rem; font-family: 'DM Sans', sans-serif; font-weight: 700; letter-spacing: 0; display: inline-block; }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a { color: #ccc; text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
-  .nav-links a:hover, .nav-links a.active { color: var(--gold); }
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-  .hamburger span { width: 24px; height: 2px; background: #fff; display: block; }
-
-  /* BREADCRUMB */
-  .breadcrumb { padding: 14px 5%; background: var(--cream); border-bottom: 1px solid var(--border); }
-  .breadcrumb ol { display: flex; gap: 0.5rem; align-items: center; list-style: none; font-size: 0.75rem; flex-wrap: wrap; }
-  .breadcrumb li { color: var(--mid); }
-  .breadcrumb li + li::before { content: '›'; margin-right: 0.5rem; color: var(--border); }
-  .breadcrumb a { color: var(--mid); text-decoration: none; transition: color 0.2s; }
-  .breadcrumb a:hover { color: var(--gold); }
-  .breadcrumb li:last-child { color: var(--gold); }
-
-  /* POST */
-  .post-wrapper { padding: 60px 5% 80px; }
-  .post-wrapper-inner { max-width: 800px; margin: 0 auto; }
-  .back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); text-decoration: none; margin-bottom: 2.5rem; transition: color 0.2s; }
-  .back-btn:hover { color: var(--rust); }
-  .post-full-header { margin-bottom: 3rem; }
-  .post-meta { display: flex; gap: 1.2rem; align-items: center; margin-bottom: 1.2rem; flex-wrap: wrap; }
-  .post-date { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); }
-  .post-tag { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--ink); color: var(--gold); padding: 3px 10px; border-radius: 2px; }
-  .post-read { font-size: 0.75rem; color: var(--mid); }
-  .post-full-header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 900; line-height: 1.15; color: var(--ink); margin-bottom: 1rem; }
-  .post-full-header h1 em { font-style: italic; color: var(--rust); }
-
-  article.post-body { max-width: 680px; }
-  article.post-body p { font-size: 1.05rem; line-height: 1.9; color: #2a2825; margin-bottom: 1.3rem; }
-  article.post-body p strong { color: var(--ink); font-weight: 500; }
-  article.post-body h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; margin: 2.5rem 0 1rem; color: var(--ink); }
-  article.post-body .pullquote { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-style: italic; color: var(--rust); border-left: 3px solid var(--rust); padding-left: 1.4rem; margin: 2.5rem 0; line-height: 1.5; }
-
-  /* RELATED POSTS */
-  .related-posts { border-top: 1px solid var(--border); margin-top: 4rem; padding-top: 3rem; max-width: 680px; }
-  .related-posts h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--ink); }
-  .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
-  .related-card { border: 1px solid var(--border); padding: 1.4rem; border-radius: 4px; background: #fff; text-decoration: none; display: block; transition: border-color 0.2s, box-shadow 0.2s; }
-  .related-card:hover { border-color: var(--gold); box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
-  .related-card .rc-tag { font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); background: var(--ink); padding: 2px 8px; border-radius: 2px; display: inline-block; margin-bottom: 0.7rem; }
-  .related-card h4 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--ink); line-height: 1.35; margin-bottom: 0.5rem; }
-  .related-card p { font-size: 0.85rem; color: var(--mid); line-height: 1.6; }
-
-  /* FOOTER */
-  footer { background: #080807; color: #666; padding: 30px 5%; font-size: 0.78rem; }
-  .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
-  footer .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--gold); letter-spacing: 0.05em; }
-  .footer-nav { display: flex; flex-wrap: wrap; gap: 0.6rem 1.2rem; }
-  .footer-nav a { color: #b5b5b5; text-decoration: none; transition: color 0.2s; }
-  .footer-nav a:hover { color: var(--gold); }
-  .footer-bottom { border-top: 1px solid #1a1916; padding-top: 1rem; color: #aaa; font-size: 0.75rem; }
-  .skip-to-main { position: absolute; top: -100%; left: 1rem; background: var(--gold); color: var(--ink); padding: 0.5rem 1rem; font-weight: 700; text-decoration: none; z-index: 9999; border-radius: 0 0 4px 4px; }
-  .skip-to-main:focus { top: 0; }
-  @media (max-width: 768px) {
-    .nav-links { display: none; flex-direction: column; }
-    .nav-links.open { display: flex; position: absolute; top: 64px; left: 0; right: 0; background: var(--ink); padding: 1.5rem 5%; border-top: 1px solid #333; }
-    .hamburger { display: flex; }
-  }
-
-  .author-card { display: flex; gap: 1.4rem; align-items: flex-start; padding: 1.8rem; background: #fff; border: 1px solid var(--border); border-radius: 4px; margin-top: 2.5rem; max-width: 680px; }
-  .author-card img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; object-position: center top; flex-shrink: 0; border: 2px solid var(--border); }
-  .author-card-info .author-name { font-weight: 500; color: var(--ink); font-size: 0.97rem; margin-bottom: 0.25rem; }
-  .author-card-info p { font-size: 0.88rem; color: var(--mid); line-height: 1.7; margin: 0; }
-</style>
 </head>
 <body>
 <a href="#main-content" class="skip-to-main">Skip to main content</a>
@@ -274,7 +193,6 @@
         </div>
 
       </article>
-
 
     </div>
   </div>

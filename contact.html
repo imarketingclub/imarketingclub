@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="styles.css">
 <link rel="icon" href="logo.webp">
 <meta name="theme-color" content="#0f0e0d">
 <meta name="description" content="Get in touch with Jay Salton at iMarketing Club.">
@@ -25,119 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap"></noscript>
-<style>
-  :root {
-    --ink: #0f0e0d;
-    --cream: #faf7f2;
-    --gold: #c9963a;
-    --gold-light: #e8b84b;
-    --rust: #b84a2b;
-    --mid: #6b6560;
-    --border: #e0d9d0;
-    --success: #2d7d46;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
 
-  nav { position: sticky; top: 0; z-index: 100; background: var(--ink); padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 64px; border-bottom: 2px solid var(--gold); }
-  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.05em; color: var(--gold); text-decoration: none; }
-  .nav-logo span { color: #fff; }
-  .nav-i { color: var(--gold) !important; font-size: 1.3rem; font-family: 'DM Sans', sans-serif; font-weight: 700; letter-spacing: 0; display: inline-block; }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a { color: #ccc; text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
-  .nav-links a:hover, .nav-links a.active { color: var(--gold); }
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-  .hamburger span { width: 24px; height: 2px; background: #fff; display: block; }
-
-  .page-hero { background: var(--ink); color: #fff; padding: 70px 5% 80px; }
-  .page-hero-inner { max-width: 700px; }
-  .kicker { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #7a5c1e; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(201,150,58,0.4); padding: 4px 12px; border-radius: 2px; }
-  h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; }
-  h1 em { font-style: italic; color: var(--gold-light); }
-  .hero-sub { font-size: 1.05rem; color: #aaa; line-height: 1.8; max-width: 520px; }
-
-  .contact-section { flex: 1; padding: 70px 5%; }
-  .contact-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.8fr; gap: 6rem; align-items: start; }
-
-  .contact-sidebar h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; line-height: 1.25; margin-bottom: 1rem; }
-  .contact-sidebar p { font-size: 0.95rem; color: var(--mid); line-height: 1.8; margin-bottom: 1.5rem; }
-  .contact-detail { display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 1.2rem; }
-  .contact-detail .icon { font-size: 1.2rem; margin-top: 2px; flex-shrink: 0; }
-  .contact-detail .text { font-size: 0.9rem; }
-  .contact-detail .label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); margin-bottom: 2px; }
-  .contact-detail a { color: var(--gold); text-decoration: none; font-weight: 500; }
-  .contact-detail a:hover { text-decoration: underline; }
-
-  .form-group { margin-bottom: 1.6rem; }
-  label { display: block; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.5rem; }
-  label .req { color: var(--rust); margin-left: 2px; }
-  input[type="text"], input[type="email"], select, textarea {
-    width: 100%; background: #fff; border: 1px solid var(--border); border-radius: 2px;
-    padding: 14px 16px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
-    font-weight: 300; color: var(--ink); outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s; appearance: none;
-  }
-  input:focus, select:focus, textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,150,58,0.12); }
-  input.error, select.error, textarea.error { border-color: var(--rust); }
-  .field-error { font-size: 0.8rem; color: var(--rust); margin-top: 4px; display: none; }
-  .field-error.show { display: block; }
-  textarea { min-height: 160px; resize: vertical; }
-  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6560' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; cursor: pointer; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-
-  .submit-btn {
-    display: block; width: 100%; background: var(--ink); color: var(--gold);
-    border: 2px solid var(--ink); padding: 16px 32px; font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
-    cursor: pointer; border-radius: 2px; transition: background 0.2s, color 0.2s, transform 0.15s; margin-top: 0.4rem;
-  }
-  .submit-btn:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); transform: translateY(-2px); }
-  .submit-btn:active { transform: translateY(0); }
-  .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-  .form-note { font-size: 0.78rem; color: var(--mid); margin-top: 0.8rem; text-align: center; }
-
-  .setup-notice {
-    background: #fffbf0; border: 1px solid var(--gold); border-left: 4px solid var(--gold);
-    padding: 1.2rem 1.5rem; border-radius: 2px; margin-bottom: 2rem; font-size: 0.88rem; color: #5a4a1a;
-  }
-  .setup-notice strong { color: var(--ink); display: block; margin-bottom: 0.3rem; }
-  .setup-notice code { background: rgba(201,150,58,0.15); padding: 1px 5px; border-radius: 2px; font-size: 0.82rem; }
-  .setup-notice a { color: var(--rust); font-weight: 500; }
-
-  .success-msg { display: none; background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--success); padding: 2.5rem; border-radius: 3px; text-align: center; }
-  .success-msg.show { display: block; }
-  .success-msg .success-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
-  .success-msg h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
-  .success-msg p { font-size: 0.92rem; color: var(--mid); }
-
-  .error-msg { display: none; background: #fff8f8; border: 1px solid #e0a0a0; border-left: 4px solid var(--rust); padding: 1.2rem 1.5rem; border-radius: 2px; margin-top: 1rem; font-size: 0.88rem; color: var(--rust); }
-  .error-msg.show { display: block; }
-
-footer { background: #080807; color: #666; padding: 30px 5%; font-size: 0.78rem; }
-  .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
-  footer .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--gold); letter-spacing: 0.05em; }
-  .footer-nav { display: flex; flex-wrap: wrap; gap: 0.6rem 1.2rem; }
-  .footer-nav a { color: #b5b5b5; text-decoration: none; transition: color 0.2s; }
-  .footer-nav a:hover { color: var(--gold); }
-  .footer-bottom { border-top: 1px solid #1a1916; padding-top: 1rem; color: #aaaaaa; font-size: 0.75rem; }
-
-  @media (max-width: 768px) {
-    .nav-links { display: none; flex-direction: column; }
-    .nav-links.open { display: flex; position: absolute; top: 64px; left: 0; right: 0; background: var(--ink); padding: 1.5rem 5%; border-top: 1px solid #333; }
-    .hamburger { display: flex; }
-    .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .form-row { grid-template-columns: 1fr; }
-  }
-  .skip-to-main {
-    position: absolute; top: -100%; left: 1rem;
-    background: var(--gold); color: var(--ink);
-    padding: 0.5rem 1rem; font-weight: 700;
-    text-decoration: none; z-index: 9999;
-    border-radius: 0 0 4px 4px;
-  }
-  .skip-to-main:focus { top: 0; }
-</style>
 </head>
 <body>
 <a href="#main-content" class="skip-to-main">Skip to main content</a>

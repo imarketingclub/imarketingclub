@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="styles.css">
 <link rel="icon" href="logo.webp">
 <meta name="theme-color" content="#0f0e0d">
 <meta name="description" content="The best digital marketing tools curated by Jay Salton — funnel builders, email marketing, traffic, training and more.">
@@ -179,106 +180,7 @@
 <link rel="dns-prefetch" href="//www.plrfunnels.com">
 <link rel="dns-prefetch" href="//www.wealthyaffiliate.com">
 <link rel="dns-prefetch" href="//udimi.com">
-<style>
-  :root {
-    --ink: #0f0e0d; --cream: #faf7f2; --gold: #c9963a; --gold-light: #e8b84b;
-    --rust: #b84a2b; --mid: #4a4540; --border: #e0d9d0;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
 
-  .skip-to-main { position: absolute; top: -100%; left: 1rem; background: var(--gold); color: var(--ink); padding: 0.5rem 1rem; font-weight: 700; text-decoration: none; z-index: 9999; border-radius: 0 0 4px 4px; }
-  .skip-to-main:focus { top: 0; }
-
-  nav { position: sticky; top: 0; z-index: 100; background: var(--ink); padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 64px; border-bottom: 2px solid var(--gold); }
-  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.05em; color: var(--gold); text-decoration: none; }
-  .nav-logo span { color: #fff; }
-  .nav-i { color: var(--gold) !important; font-size: 1.3rem; font-family: 'DM Sans', sans-serif; font-weight: 700; letter-spacing: 0; display: inline-block; }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a { color: #ccc; text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
-  .nav-links a:hover, .nav-links a.active { color: var(--gold); }
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-  .hamburger span { width: 24px; height: 2px; background: #fff; display: block; }
-
-  .page-hero { background: var(--ink); color: #fff; padding: 70px 5% 80px; position: relative; overflow: hidden; }
-  .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(201,150,58,0.1) 0%, transparent 60%); pointer-events: none; }
-  .page-hero-inner { max-width: 700px; position: relative; z-index: 1; }
-  .kicker { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(201,150,58,0.4); padding: 4px 12px; border-radius: 2px; }
-  h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; }
-  h1 em { font-style: italic; color: var(--gold-light); }
-  .hero-sub { font-size: 1.05rem; color: #c8c4be; line-height: 1.8; max-width: 560px; }
-
-  section { padding: 70px 5%; }
-  .section-inner { max-width: 960px; margin: 0 auto; }
-  .section-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #5a4010; margin-bottom: 0.8rem; }
-
-  .category-section { margin-bottom: 5rem; }
-  .category-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border); }
-  .category-badge { font-family: 'Bebas Neue', sans-serif; font-size: 0.88rem; letter-spacing: 0.12em; padding: 5px 14px; border-radius: 2px; color: #fff; background: var(--ink); }
-  .category-title { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--mid); }
-
-  /* Featured card */
-  .featured-card { background: var(--ink); border: 2px solid var(--gold); border-radius: 3px; padding: 2.4rem 2.8rem; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; margin-bottom: 1.5rem; position: relative; overflow: hidden; }
-  .featured-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 90% 50%, rgba(201,150,58,0.08) 0%, transparent 65%); pointer-events: none; }
-  .featured-badge { position: absolute; top: 0; right: 0; background: var(--gold); color: var(--ink); font-family: 'Bebas Neue', sans-serif; font-size: 0.78rem; letter-spacing: 0.14em; padding: 4px 14px; border-bottom-left-radius: 3px; }
-  .featured-card .tool-icon { font-size: 2.4rem; margin-bottom: 0.6rem; }
-  .featured-card h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #fff; margin-bottom: 0.3rem; }
-  .featured-card .tool-type { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
-  .featured-card p { font-size: 0.95rem; color: #bbb; line-height: 1.7; max-width: 540px; }
-  .tool-cta-featured { display: inline-block; white-space: nowrap; padding: 14px 28px; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); background: var(--gold); text-decoration: none; border-radius: 2px; transition: background 0.15s, transform 0.15s; position: relative; z-index: 1; }
-  .tool-cta-featured:hover { background: var(--gold-light); transform: translateY(-2px); }
-
-  /* Standard grid */
-  .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
-  .tool-card { background: #fff; border: 1px solid var(--border); padding: 1.8rem; border-radius: 3px; display: flex; flex-direction: column; transition: box-shadow 0.2s, border-color 0.2s, transform 0.15s; position: relative; overflow: hidden; }
-  .tool-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.25s; }
-  .tool-card:hover::before { transform: scaleX(1); }
-  .tool-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform: translateY(-3px); border-color: transparent; }
-  .tool-icon { font-size: 2rem; margin-bottom: 0.8rem; }
-  .tool-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.4rem; }
-  .tool-type { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.8rem; }
-  .tool-card p { font-size: 0.9rem; color: var(--mid); line-height: 1.65; flex: 1; margin-bottom: 1.2rem; }
-  .tool-cta { display: inline-block; text-align: center; padding: 10px 20px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); background: var(--gold); text-decoration: none; border-radius: 2px; transition: background 0.15s; }
-  .tool-cta:hover { background: var(--gold-light); }
-
-  .disclaimer { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 1.5rem 2rem; font-size: 0.88rem; color: var(--mid); margin-bottom: 3.5rem; border-radius: 2px; }
-  .disclaimer strong { color: var(--ink); }
-
-  #siteseal { display: inline-block; min-width: 80px; min-height: 50px; vertical-align: middle; }
-  footer { background: #080807; color: #666; padding: 30px 5%; font-size: 0.78rem; }
-  .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
-  footer .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--gold); letter-spacing: 0.05em; }
-  .footer-nav { display: flex; flex-wrap: wrap; gap: 0.6rem 1.2rem; }
-  .footer-nav a { color: #b5b5b5; text-decoration: none; transition: color 0.2s; }
-  .footer-nav a:hover { color: var(--gold); }
-  .footer-bottom { border-top: 1px solid #1a1916; padding-top: 1rem; color: #aaaaaa; font-size: 0.75rem; }
-
-  @media (max-width: 768px) {
-    .nav-links { display: none; flex-direction: column; }
-    .nav-links.open { display: flex; position: absolute; top: 64px; left: 0; right: 0; background: var(--ink); padding: 1.5rem 5%; border-top: 1px solid #333; }
-    .hamburger { display: flex; }
-    .tools-grid { grid-template-columns: 1fr; }
-    .featured-card { grid-template-columns: 1fr; }
-    .tool-cta-featured { width: 100%; text-align: center; }
-  }
-  /* ── FAQ SECTION ───────────────────────────────────────── */
-  .faq-section { padding: 60px 5%; background: var(--cream); }
-  .faq-inner { max-width: 760px; margin: 0 auto; }
-  .faq-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 0.6rem; }
-  .faq-heading { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; line-height: 1.2; margin-bottom: 2rem; }
-  .faq-heading em { font-style: italic; color: var(--rust); }
-  .faq-list { list-style: none; }
-  .faq-item { border-top: 1px solid var(--border); }
-  .faq-item:last-child { border-bottom: 1px solid var(--border); }
-  .faq-question { width: 100%; background: none; border: none; text-align: left; cursor: pointer; padding: 1.2rem 0; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500; color: var(--ink); line-height: 1.5; }
-  .faq-question:hover { color: var(--gold); }
-  .faq-icon { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--gold); color: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 1rem; line-height: 1; transition: transform 0.25s, background 0.2s; }
-  .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--gold); color: var(--ink); }
-  .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.25s ease; }
-  .faq-item.open .faq-answer { max-height: 400px; }
-  .faq-answer p { padding: 0 0 1.4rem; font-size: 0.97rem; color: #3a3530; line-height: 1.85; }
-</style>
 </head>
 <body>
 <a href="#main-content" class="skip-to-main">Skip to main content</a>
