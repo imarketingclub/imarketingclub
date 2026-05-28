@@ -18,6 +18,22 @@ jobs:
       - name: Install lftp
         run: sudo apt-get install -y lftp
 
+      - name: FTP directory probe
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          SERVER=$(echo "$FTP_SERVER" | tr -d '[:space:]' | sed 's|^ftps\?://||' | sed 's|/$||')
+          echo "=== FTP root listing ==="
+          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" \
+            -e "set ftp:ssl-allow no; set ftp:passive-mode true; set net:timeout 60; ls; bye" \
+            ftp://$SERVER
+          echo "=== /public_html listing ==="
+          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" \
+            -e "set ftp:ssl-allow no; set ftp:passive-mode true; set net:timeout 60; ls /public_html; bye" \
+            ftp://$SERVER
+
       - name: Deploy via FTP
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
