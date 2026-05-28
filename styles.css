@@ -514,6 +514,10 @@ section { padding: 80px 5%; }
   transition: background 0.2s, transform 0.15s;
 }
 .btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+.btn--primary { background: var(--gold); color: var(--ink); }
+.btn--primary:hover { background: var(--gold-light); color: var(--ink); }
+.btn--secondary { background: transparent; border: 2px solid var(--gold); color: var(--gold); padding: 14px 36px; }
+.btn--secondary:hover { background: var(--gold); color: var(--ink); }
 
 .btn-outline {
   background: transparent;
@@ -2572,6 +2576,20 @@ hr.divider { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0
 .callout.green .callout-label { color: var(--green); }
 
 .callout.red .callout-label { color: var(--rust); }
+
+/* Inline opt-in callout inside blog posts */
+.inline-optin { border-left: 3px solid var(--gold); background: rgba(212,175,55,0.07); padding: 0.75rem 1.1rem; margin: 1.6rem 0; border-radius: 0 4px 4px 0; }
+.inline-optin p { font-size: 0.95rem !important; line-height: 1.6 !important; margin-bottom: 0 !important; }
+
+/* Opt-in strip between hero and Who section on homepage */
+.optin-strip { background: #111; padding: 2.2rem 1.5rem; text-align: center; }
+.optin-strip h2 { font-family: 'DM Sans', sans-serif; font-size: clamp(1rem,2.5vw,1.25rem); font-weight: 500; color: var(--gold); margin-bottom: 0.5rem; }
+.optin-strip p { font-size: 0.97rem; color: #b0a898; margin-bottom: 1.2rem; }
+
+/* Opt-in aside on tools page */
+.tools-optin { background: #1a1814; border: 1px solid #2e2a24; padding: 1.4rem 1.8rem; margin: 2rem 0; border-radius: 6px; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.tools-optin p { font-size: 0.97rem; color: #c8c0b4; margin: 0; flex: 1 1 200px; }
+.tools-optin p strong { color: #fff; }
 
 .compare-wrap { overflow-x: auto; margin: 2rem 0; }
 
