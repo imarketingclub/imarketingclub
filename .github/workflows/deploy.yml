@@ -15,18 +15,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install sshpass
-        run: sudo apt-get install -y sshpass
-
       - name: Deploy via SFTP
         env:
           SFTP_SERVER: ${{ secrets.FTP_SERVER }}
           SFTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          SFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           SFTP_DIR: ${{ secrets.FTP_SERVER_DIR }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           SERVER=$(echo "$SFTP_SERVER" | tr -d '[:space:]' | sed 's|^ftps\?://||' | sed 's|/$||')
           DIR=$(echo "$SFTP_DIR" | tr -d '[:space:]' | sed 's|^/||' | sed 's|/$||')
+
+          # Write SSH key
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H "$SERVER" >> ~/.ssh/known_hosts 2>/dev/null
 
           BATCH=$(mktemp)
           {
@@ -52,7 +55,7 @@ jobs:
           head -20 "$BATCH"
           echo "--------------------------------------------"
 
-          sshpass -p "$SFTP_PASSWORD" sftp \
+          sftp -i ~/.ssh/id_rsa \
             -o StrictHostKeyChecking=no \
             -o UserKnownHostsFile=/dev/null \
             -b "$BATCH" \
