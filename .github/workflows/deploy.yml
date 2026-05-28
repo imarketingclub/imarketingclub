@@ -40,7 +40,8 @@ jobs:
             -o UserKnownHostsFile=/dev/null \
             -o BatchMode=yes \
             -i ~/.ssh/id_rsa \
-            "$SFTP_USERNAME@$SERVER" echo ok 2>&1 | grep -E "(debug1|Authentications|Permission|Offering|key|identity|user)" | head -40
+            "$SFTP_USERNAME@$SERVER" echo ok > /tmp/ssh_debug.txt 2>&1 || true
+          grep -iE "(offering|accepted|server accept|denied|login|user|pubkey|authenticat)" /tmp/ssh_debug.txt | head -30
           echo "=== end auth test ==="
 
           BATCH=$(mktemp)
