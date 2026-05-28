@@ -28,30 +28,8 @@ jobs:
           SERVER=$(echo "$FTP_SERVER" | tr -d '[:space:]' | sed 's|^ftps\?://||' | sed 's|/$||')
           DIR=$(echo "$FTP_SERVER_DIR" | tr -d '[:space:]' | sed 's|^/*||' | sed 's|/*$||')
 
-          SCRIPT=$(mktemp)
-          {
-            echo "set ftp:ssl-allow no"
-            echo "set ftp:passive-mode true"
-            echo "set net:timeout 60"
-            echo "debug 3"
-            echo "open -u \"$FTP_USERNAME\",\"$FTP_PASSWORD\" ftp://$SERVER"
-            find . -type f \
-              ! -path './.git/*' \
-              ! -path './.github/*' \
-              ! -name '.gitignore' \
-              | while IFS= read -r file; do
-                if [ -n "$DIR" ]; then
-                  echo "put $file -o /$DIR/${file#./}"
-                else
-                  echo "put $file -o /${file#./}"
-                fi
-              done
-            echo "bye"
-          } > "$SCRIPT"
-
-          echo "--- script preview (first 20 lines) ---"
-          head -20 "$SCRIPT"
-          echo "----------------------------------------"
-
-          lftp -f "$SCRIPT"
-          echo "Deploy complete."
+          echo "=== Single file test: uploading join.html ==="
+          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" \
+            -e "set ftp:ssl-allow no; set ftp:passive-mode true; set net:timeout 60; debug 5; put join.html -o /join.html; ls /join.html; bye" \
+            ftp://$SERVER 2>&1 | head -60
+          echo "=== done ==="
