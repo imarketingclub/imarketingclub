@@ -21,19 +21,25 @@ jobs:
             exit 0
           fi
 
-          RESPONSE=$(curl -s -w "\nHTTP_STATUS:%{http_code}" \
+          # Step 1: pull latest from GitHub into cPanel repo
+          echo "Step 1: Pulling repo..."
+          PULL=$(curl -s -w "\nHTTP:%{http_code}" \
             -H "Authorization: cpanel ${CPANEL_USER}:${CPANEL_TOKEN}" \
             "https://${CPANEL_DOMAIN}:2083/execute/VersionControl/update?repository_root=${CPANEL_REPO_PATH}")
+          echo "$PULL"
 
-          HTTP_STATUS=$(echo "$RESPONSE" | grep "HTTP_STATUS:" | cut -d: -f2)
-          BODY=$(echo "$RESPONSE" | grep -v "HTTP_STATUS:")
+          # Step 2: run .cpanel.yml deployment tasks (copies files to public_html)
+          echo "Step 2: Running deployment tasks..."
+          DEPLOY=$(curl -s -w "\nHTTP:%{http_code}" \
+            -X POST \
+            -H "Authorization: cpanel ${CPANEL_USER}:${CPANEL_TOKEN}" \
+            "https://${CPANEL_DOMAIN}:2083/execute/VersionControlDeployment/create?repository_root=${CPANEL_REPO_PATH}")
+          echo "$DEPLOY"
 
-          echo "HTTP Status: $HTTP_STATUS"
-          echo "Response: $BODY"
-
+          HTTP_STATUS=$(echo "$DEPLOY" | grep "HTTP:" | cut -d: -f2)
           if [ "$HTTP_STATUS" = "200" ]; then
             echo "Deploy triggered successfully."
           else
-            echo "Deploy request failed."
+            echo "Deploy request failed with status $HTTP_STATUS"
             exit 1
           fi
