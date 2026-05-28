@@ -121,6 +121,11 @@
           <span class="field-error" id="messageErr">Please write your message.</span>
         </div>
 
+        <div class="form-row form-row--checkbox">
+          <input type="checkbox" id="newsletter-optin" name="newsletter_optin" value="yes" checked>
+          <label for="newsletter-optin">Also send me Jay's occasional emails on what's working in digital marketing. No spam, ever.</label>
+        </div>
+
         <button type="submit" class="submit-btn" id="submitBtn">Send Message →</button>
         <p class="form-note">Your details will only be used to respond to your message. No spam. Ever.</p>
         <div class="error-msg" id="errorMsg">Something went wrong sending your message. Please try again, or email jay@imarketingclub.com directly.</div>
@@ -166,10 +171,11 @@ form.addEventListener('submit', async function(e) {
 
   let valid = true;
 
-  const fn   = document.getElementById('firstName');
-  const em   = document.getElementById('email');
-  const sub  = document.getElementById('subject');
-  const msg  = document.getElementById('message');
+  const fn    = document.getElementById('firstName');
+  const em    = document.getElementById('email');
+  const sub   = document.getElementById('subject');
+  const msg   = document.getElementById('message');
+  const optin = document.getElementById('newsletter-optin');
 
   // Validate first name
   if (!fn.value.trim()) {
@@ -232,16 +238,30 @@ form.addEventListener('submit', async function(e) {
       method: 'POST',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name:    fullName,
-        email:   em.value.trim(),
-        topic:   sub.value,
-        message: msg.value.trim(),
-        _subject: '[iMarketing Club] ' + sub.value + ' — from ' + fullName,
-        _replyto: em.value.trim()
+        name:             fullName,
+        email:            em.value.trim(),
+        topic:            sub.value,
+        message:          msg.value.trim(),
+        newsletter_optin: optin.checked ? 'yes' : 'no',
+        _subject:         '[iMarketing Club] ' + sub.value + ' — from ' + fullName,
+        _replyto:         em.value.trim()
       })
     });
 
     if (response.ok) {
+      // If opted in, add to GetResponse list (fire-and-forget)
+      if (optin.checked) {
+        fetch('https://app.getresponse.com/add_subscriber.html', {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({
+            webform_id: 'c7a1415d-c2db-416b-ad49-c914f3cf29b3',
+            email: em.value.trim(),
+            name: fullName
+          }).toString()
+        }).catch(function() {});
+      }
       form.style.display = 'none';
       document.getElementById('successMsg').classList.add('show');
       const notice = document.getElementById('setupNotice');

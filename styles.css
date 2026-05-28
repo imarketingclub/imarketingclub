@@ -1598,6 +1598,9 @@ select {
   cursor: pointer;
 }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.form-row--checkbox { display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 1.2rem; }
+.form-row--checkbox input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; accent-color: var(--gold); width: 16px; height: 16px; cursor: pointer; }
+.form-row--checkbox label { font-size: 0.88rem; color: var(--mid); cursor: pointer; line-height: 1.5; font-weight: 400; margin-bottom: 0; }
 .form-note { font-size: 0.78rem; color: var(--mid); margin-top: 0.8rem; text-align: center; }
 
 .setup-notice {
