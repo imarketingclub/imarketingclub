@@ -2674,13 +2674,6 @@ color: #fff; padding: 2rem 2.2rem; margin: 2.8rem 0; border-radius: 4px; }
   }
 
 /* ── 404 PAGE ── */
-body, h1, p {
-  font-family: "Helvetica Neue", "Segoe UI", Segoe, Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: normal;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-}
 
 .container {
   margin-left:  auto;
