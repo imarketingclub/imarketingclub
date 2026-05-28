@@ -6,16 +6,34 @@ on:
       - main
 
 jobs:
-  notify:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger cPanel Git pull
+      - name: Trigger cPanel Git deploy
         env:
-          CPANEL_WEBHOOK: ${{ secrets.CPANEL_WEBHOOK }}
+          CPANEL_USER: ${{ secrets.CPANEL_USER }}
+          CPANEL_TOKEN: ${{ secrets.CPANEL_TOKEN }}
+          CPANEL_DOMAIN: ${{ secrets.CPANEL_DOMAIN }}
+          CPANEL_REPO_PATH: ${{ secrets.CPANEL_REPO_PATH }}
         run: |
-          if [ -n "$CPANEL_WEBHOOK" ]; then
-            curl -s "$CPANEL_WEBHOOK"
-            echo "Deploy triggered."
+          if [ -z "$CPANEL_TOKEN" ]; then
+            echo "CPANEL_TOKEN not set — deploy manually in cPanel Git Version Control."
+            exit 0
+          fi
+
+          RESPONSE=$(curl -s -w "\nHTTP_STATUS:%{http_code}" \
+            -H "Authorization: cpanel ${CPANEL_USER}:${CPANEL_TOKEN}" \
+            "https://${CPANEL_DOMAIN}:2083/execute/VersionControl/update?repository_root=${CPANEL_REPO_PATH}")
+
+          HTTP_STATUS=$(echo "$RESPONSE" | grep "HTTP_STATUS:" | cut -d: -f2)
+          BODY=$(echo "$RESPONSE" | grep -v "HTTP_STATUS:")
+
+          echo "HTTP Status: $HTTP_STATUS"
+          echo "Response: $BODY"
+
+          if [ "$HTTP_STATUS" = "200" ]; then
+            echo "Deploy triggered successfully."
           else
-            echo "CPANEL_WEBHOOK secret not set — deploy manually in cPanel Git Version Control."
+            echo "Deploy request failed."
+            exit 1
           fi
