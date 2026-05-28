@@ -28,5 +28,5 @@ jobs:
           SERVER=$(echo "$FTP_SERVER" | tr -d '[:space:]' | sed 's|^ftps\?://||' | sed 's|/$||')
           DIR=$(echo "$FTP_SERVER_DIR" | tr -d '[:space:]' | sed 's|/$||')
           lftp -u "$FTP_USERNAME","$FTP_PASSWORD" \
-            -e "set ssl:verify-certificate false; set ftp:ssl-allow yes; mirror --reverse --delete --verbose . /$DIR; bye" \
+            -e "set ssl:verify-certificate false; set ftp:ssl-allow yes; set ftp:passive-mode true; set net:timeout 30; set net:max-retries 3; mirror --reverse --delete --verbose . /$DIR; bye" \
             ftp://$SERVER
