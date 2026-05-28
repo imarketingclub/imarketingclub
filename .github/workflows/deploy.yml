@@ -6,30 +6,16 @@ on:
       - main
 
 jobs:
-  deploy:
+  notify:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Install lftp
-        run: sudo apt-get install -y lftp
-
-      - name: Deploy via FTP
+      - name: Trigger cPanel Git pull
         env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
+          CPANEL_WEBHOOK: ${{ secrets.CPANEL_WEBHOOK }}
         run: |
-          SERVER=$(echo "$FTP_SERVER" | tr -d '[:space:]' | sed 's|^ftps\?://||' | sed 's|/$||')
-          DIR=$(echo "$FTP_SERVER_DIR" | tr -d '[:space:]' | sed 's|^/*||' | sed 's|/*$||')
-
-          echo "=== Single file test: uploading join.html ==="
-          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" \
-            -e "set ftp:ssl-allow no; set ftp:passive-mode true; set net:timeout 60; debug 5; put join.html -o /join.html; ls /join.html; bye" \
-            ftp://$SERVER 2>&1 | head -60
-          echo "=== done ==="
+          if [ -n "$CPANEL_WEBHOOK" ]; then
+            curl -s "$CPANEL_WEBHOOK"
+            echo "Deploy triggered."
+          else
+            echo "CPANEL_WEBHOOK secret not set — deploy manually in cPanel Git Version Control."
+          fi
