@@ -39,7 +39,7 @@ jobs:
               ! -path './.github*' \
               ! -name '.' \
               | while IFS= read -r d; do
-                echo "mkdir -p /$DIR/${d#./}"
+                echo "-mkdir -p /$DIR/${d#./}"
               done
             find . -type f \
               ! -path './.git/*' \
