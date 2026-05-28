@@ -1847,22 +1847,21 @@ body.join-page {
   flex: 1;
   display: grid;
   grid-template-columns: 1fr 440px;
-  gap: 0;
+  gap: 0 40px;
   max-width: 1080px;
   width: 100%;
   margin: 0 auto;
   padding: 0 5%;
-  align-items: center;
+  align-items: start;
   position: relative;
   z-index: 1;
 }
 
 /* ── HERO COPY (join) ─────────────────────────────────────── */
 .hero-copy.join-copy {
-  padding: 40px 48px 40px 0;
+  padding: 20px 48px 20px 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .headline {
