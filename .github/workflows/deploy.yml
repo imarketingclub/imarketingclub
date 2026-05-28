@@ -42,7 +42,9 @@ jobs:
               | while IFS= read -r file; do
                 remote="${file#./}"
                 dir=$(dirname "$remote")
-                echo "mkdir -p /$DIR/$dir"
+                if [ "$dir" != "." ]; then
+                  echo "mkdir -p /$DIR/$dir"
+                fi
                 echo "put $file -o /$DIR/$remote"
               done
             echo "bye"
