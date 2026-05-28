@@ -97,33 +97,8 @@
         Enter your name and email and I'll send it straight to your inbox.
       </p>
 
-      <!-- Native HTML form — no third-party widget JS, zero CLS, instant LCP -->
-      <div class="gr-form-wrap" id="form-wrap">
-        <div class="field">
-          <label for="firstName">First Name <span class="req" aria-hidden="true">*</span></label>
-          <input type="text" id="firstName" name="firstName" placeholder="Your first name"
-                 autocomplete="given-name" required>
-          <div class="field-error" id="err-name" role="alert">Please enter your name.</div>
-        </div>
-        <div class="field">
-          <label for="email">Email Address <span class="req" aria-hidden="true">*</span></label>
-          <input type="email" id="email" name="email" placeholder="you@example.com"
-                 autocomplete="email" required>
-          <div class="field-error" id="err-email" role="alert">Please enter a valid email.</div>
-        </div>
-        <button type="button" class="submit-btn" id="submitBtn">
-          Send Me the Free PDF →
-        </button>
-        <div class="form-error-msg" id="formErr" role="alert">
-          Something went wrong. Please try again or email jay@imarketingclub.com
-        </div>
-      </div>
-
-      <!-- Success state (hidden until confirmed) -->
-      <div class="success-state" id="successState" aria-live="polite">
-        <div class="success-icon">✅</div>
-        <h3>Check Your Inbox!</h3>
-        <p>The PDF is on its way to you now.<br>If you don't see it in a minute, check spam.</p>
+      <div class="gr-form-wrap">
+        <getresponse-form form-id="c7a1415d-c2db-416b-ad49-c914f3cf29b3" e="1"></getresponse-form>
       </div>
 
       <p class="privacy-note" style="margin-top:0.8rem;">
@@ -220,7 +195,7 @@
         Still Here?<br><em>The PDF is waiting.</em>
       </h2>
       <p>Enter your email above and it lands in your inbox instantly. Takes 10 seconds.</p>
-      <a href="#firstName" class="cta-repeat-btn" onclick="document.getElementById('firstName').focus()">
+      <a href="#form-wrap" class="cta-repeat-btn">
         Get the Free PDF →
       </a>
     </div>
@@ -260,75 +235,12 @@
 </footer>
 
 <script>
-// CTA scroll
 document.querySelector('.cta-repeat-btn').addEventListener('click', function(e) {
   e.preventDefault();
   document.querySelector('.form-panel').scrollIntoView({ behavior: 'smooth', block: 'center' });
-  setTimeout(() => document.getElementById('firstName').focus(), 500);
 });
-
-// Form submission to GetResponse API
-(function() {
-  var btn = document.getElementById('submitBtn');
-  if (!btn) return;
-
-  btn.addEventListener('click', function() {
-    var nameEl  = document.getElementById('firstName');
-    var emailEl = document.getElementById('email');
-    var errName  = document.getElementById('err-name');
-    var errEmail = document.getElementById('err-email');
-    var formErr  = document.getElementById('formErr');
-    var valid = true;
-
-    // Reset
-    nameEl.classList.remove('error');
-    emailEl.classList.remove('error');
-    errName.classList.remove('show');
-    errEmail.classList.remove('show');
-    formErr.classList.remove('show');
-
-    if (!nameEl.value.trim()) {
-      nameEl.classList.add('error');
-      errName.classList.add('show');
-      valid = false;
-    }
-    var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRe.test(emailEl.value.trim())) {
-      emailEl.classList.add('error');
-      errEmail.classList.add('show');
-      valid = false;
-    }
-    if (!valid) return;
-
-    btn.disabled = true;
-    btn.textContent = 'Sending…';
-
-    // POST to GetResponse via their legacy web form endpoint
-    // Form ID: c7a1415d-c2db-416b-ad49-c914f3cf29b3
-    var data = new FormData();
-    data.append('firstName', nameEl.value.trim());
-    data.append('email', emailEl.value.trim());
-
-    fetch('https://app.getresponse.com/add_subscriber.html', {
-      method: 'POST',
-      mode: 'no-cors',      // GR doesn't support CORS on this endpoint — no-cors is correct
-      body: new URLSearchParams({
-        'webform_id': 'c7a1415d-c2db-416b-ad49-c914f3cf29b3',
-        'firstName': nameEl.value.trim(),
-        'email': emailEl.value.trim()
-      })
-    }).then(function() {
-      // no-cors returns opaque response — treat any resolution as success
-      document.getElementById('form-wrap').style.display = 'none';
-      document.getElementById('successState').classList.add('show');
-    }).catch(function() {
-      btn.disabled = false;
-      btn.textContent = 'Send Me the Free PDF →';
-      formErr.classList.add('show');
-    });
-  });
-})();
 </script>
+<script async src="https://app.getresponse.com/view_webform_v2.js?u=80cd3aa0-897c-4943-8d39-ce6eacfd855a&webforms_id=c7a1415d-c2db-416b-ad49-c914f3cf29b3"></script>
 
 <!-- GetResponse Analytics: deferred to bottom so it never blocks rendering -->
 <script async crossorigin="use-credentials" src="https://an.gr-wcon.com/script/80cd3aa0-897c-4943-8d39-ce6eacfd855a/ga.js"></script>
