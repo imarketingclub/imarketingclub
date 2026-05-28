@@ -39,9 +39,11 @@ jobs:
             -o StrictHostKeyChecking=no \
             -o UserKnownHostsFile=/dev/null \
             -o BatchMode=yes \
+            -o PubkeyAcceptedAlgorithms=ssh-rsa \
+            -o HostKeyAlgorithms=+ssh-rsa \
             -i ~/.ssh/id_rsa \
             "$SFTP_USERNAME@$SERVER" echo ok > /tmp/ssh_debug.txt 2>&1 || true
-          grep -iE "(offering|accepted|server accept|denied|login|user|pubkey|authenticat)" /tmp/ssh_debug.txt | head -30
+          grep -iE "(offering|accepted|server accept|denied|login|user|pubkey|authenticat|signing)" /tmp/ssh_debug.txt | head -30
           echo "=== end auth test ==="
 
           BATCH=$(mktemp)
@@ -67,7 +69,7 @@ jobs:
           sftp -i ~/.ssh/id_rsa \
             -o StrictHostKeyChecking=no \
             -o UserKnownHostsFile=/dev/null \
-            -o PubkeyAcceptedAlgorithms=+ssh-rsa \
+            -o PubkeyAcceptedAlgorithms=ssh-rsa \
             -o HostKeyAlgorithms=+ssh-rsa \
             -b "$BATCH" \
             "$SFTP_USERNAME@$SERVER"
