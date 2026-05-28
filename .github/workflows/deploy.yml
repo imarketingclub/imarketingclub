@@ -8,11 +8,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    env:
-      FTP_SERVER: ${{ secrets.FTP_SERVER }}
-      FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-      FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-      FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
 
     steps:
       - name: Checkout repository
@@ -22,17 +17,20 @@ jobs:
         run: sudo apt-get install -y lftp
 
       - name: Deploy via FTP
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
         run: |
-          lftp -c "
-            set ftp:ssl-allow yes;
-            set ftp:ssl-force false;
-            set ssl:verify-certificate false;
-            open -u '$FTP_USERNAME','$FTP_PASSWORD' '$FTP_SERVER';
-            mirror --reverse --delete --verbose \
-              --exclude ^\.git \
-              --exclude ^\.github \
-              --exclude ^README\.md \
-              --exclude ^LICENSE \
-              . '$FTP_SERVER_DIR';
+          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://$FTP_SERVER" <<EOF
+            set ssl:verify-certificate false
+            set ftp:ssl-allow yes
+            mirror --reverse --delete \
+              --exclude ^\.git/ \
+              --exclude ^\.github/ \
+              --exclude ^README\.md\$ \
+              --exclude ^LICENSE\$ \
+              . $FTP_SERVER_DIR
             bye
-          "
+          EOF
