@@ -15,57 +15,47 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install lftp
-        run: sudo apt-get install -y lftp
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpass
 
-      - name: FTP debug probe
+      - name: Deploy via SFTP
         env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          SFTP_SERVER: ${{ secrets.FTP_SERVER }}
+          SFTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          SFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          SFTP_DIR: ${{ secrets.FTP_SERVER_DIR }}
         run: |
-          SERVER=$(echo "$FTP_SERVER" | tr -d '[:space:]' | sed 's|^ftps\?://||' | sed 's|/$||')
-          echo "=== FTP debug trace ==="
-          lftp -d -u "$FTP_USERNAME","$FTP_PASSWORD" \
-            -e "set ftp:ssl-allow no; set ftp:passive-mode true; set net:timeout 30; ls; bye" \
-            ftp://$SERVER 2>&1 | head -80
-          echo "=== end trace ==="
+          SERVER=$(echo "$SFTP_SERVER" | tr -d '[:space:]' | sed 's|^ftps\?://||' | sed 's|/$||')
+          DIR=$(echo "$SFTP_DIR" | tr -d '[:space:]' | sed 's|^/||' | sed 's|/$||')
 
-      - name: Deploy via FTP
-        env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
-        run: |
-          SERVER=$(echo "$FTP_SERVER" | tr -d '[:space:]' | sed 's|^ftps\?://||' | sed 's|/$||')
-          DIR=$(echo "$FTP_SERVER_DIR" | tr -d '[:space:]' | sed 's|^/||' | sed 's|/$||')
-
-          # Build lftp script: one connection, mkdir + put per file
-          SCRIPT=$(mktemp)
+          BATCH=$(mktemp)
           {
-            echo "set ftp:ssl-allow no"
-            echo "set ftp:passive-mode true"
-            echo "set net:timeout 60"
-            echo "open -u \"$FTP_USERNAME\",\"$FTP_PASSWORD\" ftp://$SERVER"
+            echo "cd $DIR"
+            find . -type d \
+              ! -path './.git*' \
+              ! -path './.github*' \
+              ! -name '.' \
+              | while IFS= read -r d; do
+                echo "-mkdir ${d#./}"
+              done
             find . -type f \
               ! -path './.git/*' \
               ! -path './.github/*' \
               ! -name '.gitignore' \
               | while IFS= read -r file; do
-                remote="${file#./}"
-                dir=$(dirname "$remote")
-                if [ "$dir" != "." ]; then
-                  echo "mkdir -p /$DIR/$dir"
-                fi
-                echo "put $file -o /$DIR/$remote"
+                echo "put $file ${file#./}"
               done
             echo "bye"
-          } > "$SCRIPT"
+          } > "$BATCH"
 
-          echo "--- lftp script preview (first 20 lines) ---"
-          head -20 "$SCRIPT"
-          echo "---------------------------------------------"
+          echo "--- SFTP batch preview (first 20 lines) ---"
+          head -20 "$BATCH"
+          echo "--------------------------------------------"
 
-          lftp -f "$SCRIPT"
+          sshpass -p "$SFTP_PASSWORD" sftp \
+            -o StrictHostKeyChecking=no \
+            -o UserKnownHostsFile=/dev/null \
+            -b "$BATCH" \
+            "$SFTP_USERNAME@$SERVER"
+
           echo "Deploy complete."
