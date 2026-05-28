@@ -130,7 +130,7 @@ nav {
 .hamburger span {
   width: 24px;
   height: 2px;
-  background: #fff;
+  background: var(--gold);
   display: block;
 }
 
