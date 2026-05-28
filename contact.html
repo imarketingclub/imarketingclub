@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="theme-color" content="#0f0e0d">
+<meta name="description" content="Get in touch with Jay Salton at iMarketing Club.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact — iMarketing Club">
+<meta property="og:description" content="Get in touch with Jay Salton at iMarketing Club.">
+<meta property="og:url" content="https://imarketingclub.com/contact.html">
+<meta property="og:image" content="https://imarketingclub.com/img/imarketing-club-social-banner.jpg">
+<meta property="og:image:width" content="1731">
+<meta property="og:image:height" content="909">
+<meta property="og:image:alt" content="iMarketing Club – Smart Marketing for the Digital Age">
+<meta property="og:site_name" content="iMarketing Club">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Contact — iMarketing Club">
+<meta name="twitter:description" content="Get in touch with Jay Salton at iMarketing Club.">
+<meta name="twitter:image" content="https://imarketingclub.com/img/imarketing-club-social-banner.jpg">
+<meta name="twitter:image:alt" content="iMarketing Club – Smart Marketing for the Digital Age">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — iMarketing Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap&display=swap">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap"></noscript>
+<style>
+  :root {
+    --ink: #0f0e0d;
+    --cream: #faf7f2;
+    --gold: #c9963a;
+    --gold-light: #e8b84b;
+    --rust: #b84a2b;
+    --mid: #6b6560;
+    --border: #e0d9d0;
+    --success: #2d7d46;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+
+  nav { position: sticky; top: 0; z-index: 100; background: var(--ink); padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 64px; border-bottom: 2px solid var(--gold); }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.05em; color: var(--gold); text-decoration: none; }
+  .nav-logo span { color: #fff; }
+  .nav-i { color: var(--gold) !important; font-size: 1.3rem; font-family: 'DM Sans', sans-serif; font-weight: 700; letter-spacing: 0; display: inline-block; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: #ccc; text-decoration: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: #fff; display: block; }
+
+  .page-hero { background: var(--ink); color: #fff; padding: 70px 5% 80px; }
+  .page-hero-inner { max-width: 700px; }
+  .kicker { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: #7a5c1e; display: inline-block; margin-bottom: 1rem; border: 1px solid rgba(201,150,58,0.4); padding: 4px 12px; border-radius: 2px; }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 1rem; }
+  h1 em { font-style: italic; color: var(--gold-light); }
+  .hero-sub { font-size: 1.05rem; color: #aaa; line-height: 1.8; max-width: 520px; }
+
+  .contact-section { flex: 1; padding: 70px 5%; }
+  .contact-inner { max-width: 960px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.8fr; gap: 6rem; align-items: start; }
+
+  .contact-sidebar h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; line-height: 1.25; margin-bottom: 1rem; }
+  .contact-sidebar p { font-size: 0.95rem; color: var(--mid); line-height: 1.8; margin-bottom: 1.5rem; }
+  .contact-detail { display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 1.2rem; }
+  .contact-detail .icon { font-size: 1.2rem; margin-top: 2px; flex-shrink: 0; }
+  .contact-detail .text { font-size: 0.9rem; }
+  .contact-detail .label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mid); margin-bottom: 2px; }
+  .contact-detail a { color: var(--gold); text-decoration: none; font-weight: 500; }
+  .contact-detail a:hover { text-decoration: underline; }
+
+  .form-group { margin-bottom: 1.6rem; }
+  label { display: block; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mid); margin-bottom: 0.5rem; }
+  label .req { color: var(--rust); margin-left: 2px; }
+  input[type="text"], input[type="email"], select, textarea {
+    width: 100%; background: #fff; border: 1px solid var(--border); border-radius: 2px;
+    padding: 14px 16px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+    font-weight: 300; color: var(--ink); outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s; appearance: none;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,150,58,0.12); }
+  input.error, select.error, textarea.error { border-color: var(--rust); }
+  .field-error { font-size: 0.8rem; color: var(--rust); margin-top: 4px; display: none; }
+  .field-error.show { display: block; }
+  textarea { min-height: 160px; resize: vertical; }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6560' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; cursor: pointer; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+
+  .submit-btn {
+    display: block; width: 100%; background: var(--ink); color: var(--gold);
+    border: 2px solid var(--ink); padding: 16px 32px; font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer; border-radius: 2px; transition: background 0.2s, color 0.2s, transform 0.15s; margin-top: 0.4rem;
+  }
+  .submit-btn:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); transform: translateY(-2px); }
+  .submit-btn:active { transform: translateY(0); }
+  .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .form-note { font-size: 0.78rem; color: var(--mid); margin-top: 0.8rem; text-align: center; }
+
+  .setup-notice {
+    background: #fffbf0; border: 1px solid var(--gold); border-left: 4px solid var(--gold);
+    padding: 1.2rem 1.5rem; border-radius: 2px; margin-bottom: 2rem; font-size: 0.88rem; color: #5a4a1a;
+  }
+  .setup-notice strong { color: var(--ink); display: block; margin-bottom: 0.3rem; }
+  .setup-notice code { background: rgba(201,150,58,0.15); padding: 1px 5px; border-radius: 2px; font-size: 0.82rem; }
+  .setup-notice a { color: var(--rust); font-weight: 500; }
+
+  .success-msg { display: none; background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--success); padding: 2.5rem; border-radius: 3px; text-align: center; }
+  .success-msg.show { display: block; }
+  .success-msg .success-icon { font-size: 2.5rem; margin-bottom: 0.8rem; }
+  .success-msg h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .success-msg p { font-size: 0.92rem; color: var(--mid); }
+
+  .error-msg { display: none; background: #fff8f8; border: 1px solid #e0a0a0; border-left: 4px solid var(--rust); padding: 1.2rem 1.5rem; border-radius: 2px; margin-top: 1rem; font-size: 0.88rem; color: var(--rust); }
+  .error-msg.show { display: block; }
+
+footer { background: #080807; color: #666; padding: 30px 5%; font-size: 0.78rem; }
+  .footer-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
+  footer .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--gold); letter-spacing: 0.05em; }
+  .footer-nav { display: flex; flex-wrap: wrap; gap: 0.6rem 1.2rem; }
+  .footer-nav a { color: #b5b5b5; text-decoration: none; transition: color 0.2s; }
+  .footer-nav a:hover { color: var(--gold); }
+  .footer-bottom { border-top: 1px solid #1a1916; padding-top: 1rem; color: #aaaaaa; font-size: 0.75rem; }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; flex-direction: column; }
+    .nav-links.open { display: flex; position: absolute; top: 64px; left: 0; right: 0; background: var(--ink); padding: 1.5rem 5%; border-top: 1px solid #333; }
+    .hamburger { display: flex; }
+    .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+  .skip-to-main {
+    position: absolute; top: -100%; left: 1rem;
+    background: var(--gold); color: var(--ink);
+    padding: 0.5rem 1rem; font-weight: 700;
+    text-decoration: none; z-index: 9999;
+    border-radius: 0 0 4px 4px;
+  }
+  .skip-to-main:focus { top: 0; }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-to-main">Skip to main content</a>
+
+<a href="#main-content" class="skip-to-main">Skip to main content</a>
+
+<nav>
+  <a class="nav-logo" href="index.html"><span class="nav-i">i</span><span>Marketing</span>Club</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="tools.html">Tools &amp; Resources</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+</nav>
+
+<main id="main-content">
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <span class="kicker">Get in Touch</span>
+    <h1>Let's Have a <em>Real Conversation</em></h1>
+    <p class="hero-sub">Got a question, a tool suggestion, or just want to say hi? Fill in the form and I'll get back to you.</p>
+  </div>
+</div>
+
+<section class="contact-section">
+  <div class="contact-inner">
+
+    <div class="contact-sidebar">
+      <h2>Jay reads every message.</h2>
+      <p>I don't have a team of virtual assistants filtering your emails. It's just me. So what you write, I'll actually read.</p>
+      <p>I can't promise a reply to every single message, but if you're a real person with a genuine question — I'll do my best.</p>
+      <div class="contact-detail">
+        <span class="icon">⏱️</span>
+        <div class="text">
+          <div class="label">Response Time</div>
+          Usually within 2–3 business days
+        </div>
+      </div>
+      <div class="contact-detail">
+        <span class="icon">🌏</span>
+        <div class="text">
+          <div class="label">Based In</div>
+          Australia (but the internet is everywhere)
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap">
+
+      <!-- SETUP NOTICE: remove this block once Formspree is configured -->
+
+      <form id="contactForm" novalidate>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="firstName">First Name <span class="req">*</span></label>
+            <input type="text" id="firstName" name="firstName" placeholder="Your first name" required autocomplete="given-name">
+            <span class="field-error" id="firstNameErr">Please enter your first name.</span>
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Your last name" autocomplete="family-name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address <span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+          <span class="field-error" id="emailErr">Please enter a valid email address.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="subject">What's this about? <span class="req">*</span></label>
+          <select id="subject" name="subject" required>
+            <option value="" disabled selected>Select a topic…</option>
+            <option value="Tool Recommendation">I have a tool recommendation</option>
+            <option value="Question">I have a question</option>
+            <option value="Collaboration">Collaboration / JV opportunity</option>
+            <option value="Blog Feedback">Blog feedback</option>
+            <option value="Just Saying Hi">Just saying hi</option>
+            <option value="Other">Something else</option>
+          </select>
+          <span class="field-error" id="subjectErr">Please select a topic.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Your Message <span class="req">*</span></label>
+          <textarea id="message" name="message" placeholder="Tell me what's on your mind…" required></textarea>
+          <span class="field-error" id="messageErr">Please write your message.</span>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">Send Message →</button>
+        <p class="form-note">Your details will only be used to respond to your message. No spam. Ever.</p>
+        <div class="error-msg" id="errorMsg">Something went wrong sending your message. Please try again, or email jay@imarketingclub.com directly.</div>
+      </form>
+
+      <div class="success-msg" id="successMsg">
+        <div class="success-icon">✅</div>
+        <h3>Message Sent!</h3>
+        <p>Thanks for reaching out. I'll be in touch within a couple of business days.<br>— Jay</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>
+  <div class="footer-top">
+    <div class="footer-logo">iMarketingClub</div>
+    <div class="footer-nav">
+      <a href="index.html">Home</a>
+      <a href="tools.html">Tools</a>
+      <a href="blog.html">Blog</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-of-service.html">Terms of Service</a>
+      <a href="affiliate-disclaimer.html">Affiliate Disclaimer</a>
+      <a href="earnings-disclaimer.html">Earnings Disclaimer</a>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2025 iMarketing Club &middot; Jay Salton &middot; All rights reserved.</div>
+  <span id="siteseal"><script async type="text/javascript" src="https://seal.godaddy.com/getSealBasic?sealID=ItaDdGLXZdPBQNBent8pvA3FScbngRLAjUi3Ddebyxu7m8uQiKgfgrzHtWXS"></script></span>
+</footer>
+
+<script>
+function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
+
+const form = document.getElementById('contactForm');
+
+form.addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  let valid = true;
+
+  const fn   = document.getElementById('firstName');
+  const em   = document.getElementById('email');
+  const sub  = document.getElementById('subject');
+  const msg  = document.getElementById('message');
+
+  // Validate first name
+  if (!fn.value.trim()) {
+    fn.classList.add('error');
+    document.getElementById('firstNameErr').classList.add('show');
+    valid = false;
+  } else {
+    fn.classList.remove('error');
+    document.getElementById('firstNameErr').classList.remove('show');
+  }
+
+  // Validate email
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(em.value.trim())) {
+    em.classList.add('error');
+    document.getElementById('emailErr').classList.add('show');
+    valid = false;
+  } else {
+    em.classList.remove('error');
+    document.getElementById('emailErr').classList.remove('show');
+  }
+
+  // Validate subject
+  if (!sub.value) {
+    sub.classList.add('error');
+    document.getElementById('subjectErr').classList.add('show');
+    valid = false;
+  } else {
+    sub.classList.remove('error');
+    document.getElementById('subjectErr').classList.remove('show');
+  }
+
+  // Validate message
+  if (!msg.value.trim()) {
+    msg.classList.add('error');
+    document.getElementById('messageErr').classList.add('show');
+    valid = false;
+  } else {
+    msg.classList.remove('error');
+    document.getElementById('messageErr').classList.remove('show');
+  }
+
+  if (!valid) return;
+
+  const btn = document.getElementById('submitBtn');
+  const errMsg = document.getElementById('errorMsg');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  errMsg.classList.remove('show');
+
+  // Build full name for submission
+  const fullName = fn.value.trim() + ' ' + document.getElementById('lastName').value.trim();
+
+  // Submit to Formspree via fetch
+  // Replace YOUR_FORM_ID with your actual Formspree form ID
+  const FORMSPREE_ID = 'xpqnyeaj';
+
+  try {
+    const response = await fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name:    fullName,
+        email:   em.value.trim(),
+        topic:   sub.value,
+        message: msg.value.trim(),
+        _subject: '[iMarketing Club] ' + sub.value + ' — from ' + fullName,
+        _replyto: em.value.trim()
+      })
+    });
+
+    if (response.ok) {
+      form.style.display = 'none';
+      document.getElementById('successMsg').classList.add('show');
+      const notice = document.getElementById('setupNotice');
+      if (notice) notice.style.display = 'none';
+    } else {
+      const data = await response.json();
+      throw new Error(data.error || 'Server error');
+    }
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Send Message →';
+    errMsg.classList.add('show');
+    console.error('Form error:', err);
+  }
+});
+
+// Live blur validation
+['firstName','email','subject','message'].forEach(function(id) {
+  document.getElementById(id).addEventListener('blur', function() {
+    if (this.value.trim() || this.value) {
+      this.classList.remove('error');
+      const errEl = document.getElementById(id + 'Err');
+      if (errEl) errEl.classList.remove('show');
+    }
+  });
+});
+</script>
+</body>
+</html>
