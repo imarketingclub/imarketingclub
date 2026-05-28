@@ -67,6 +67,8 @@ jobs:
           sftp -i ~/.ssh/id_rsa \
             -o StrictHostKeyChecking=no \
             -o UserKnownHostsFile=/dev/null \
+            -o PubkeyAcceptedAlgorithms=+ssh-rsa \
+            -o HostKeyAlgorithms=+ssh-rsa \
             -b "$BATCH" \
             "$SFTP_USERNAME@$SERVER"
 
