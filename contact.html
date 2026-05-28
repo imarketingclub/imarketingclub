@@ -249,17 +249,19 @@ form.addEventListener('submit', async function(e) {
     });
 
     if (response.ok) {
-      // If opted in, add to GetResponse list (fire-and-forget)
+      // If opted in, add to GetResponse list via REST API v3
       if (optin.checked) {
-        fetch('https://app.getresponse.com/add_subscriber.html', {
+        fetch('https://api.getresponse.com/v3/contacts', {
           method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams({
-            webform_id: 'c7a1415d-c2db-416b-ad49-c914f3cf29b3',
+          headers: {
+            'X-Auth-Token': 'api-key shfgo3ma4dsb7umj76u0mvv8c6osqi30',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
             email: em.value.trim(),
-            name: fullName
-          }).toString()
+            name: fullName,
+            campaign: { campaignId: '490060604' }
+          })
         }).catch(function() {});
       }
       form.style.display = 'none';
