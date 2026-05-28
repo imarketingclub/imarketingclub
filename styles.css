@@ -2588,8 +2588,8 @@ hr.divider { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0
 .optin-strip p { font-size: 0.97rem; color: #b0a898; margin-bottom: 1.2rem; }
 
 /* Opt-in aside on tools page */
-.tools-optin-wrap { padding: 0 5%; margin: 2rem 0; }
-.tools-optin { background: #1a1814; border: 1px solid #2e2a24; padding: 1.4rem 1.8rem; border-radius: 6px; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.tools-optin-wrap { padding: 2rem 5%; }
+.tools-optin { background: #1a1814; border: 1px solid #2e2a24; padding: 1.4rem 1.8rem; border-radius: 6px; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; max-width: 900px; margin: 0 auto; }
 .tools-optin p { font-size: 0.97rem; color: #c8c0b4; margin: 0; flex: 1 1 200px; }
 .tools-optin p strong { color: #fff; }
 
