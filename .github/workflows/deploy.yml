@@ -21,19 +21,32 @@ jobs:
             exit 0
           fi
 
+          # URL-encode the repo path
+          ENCODED_PATH=$(python3 -c "import urllib.parse; import os; print(urllib.parse.quote(os.environ['CPANEL_REPO_PATH'], safe=''))")
+          echo "Repo path encoded."
+
           # Step 1: pull latest from GitHub into cPanel repo
           echo "Step 1: Pulling repo..."
           PULL=$(curl -s -w "\nHTTP:%{http_code}" \
             -H "Authorization: cpanel ${CPANEL_USER}:${CPANEL_TOKEN}" \
-            "https://${CPANEL_DOMAIN}:2083/execute/VersionControl/update?repository_root=${CPANEL_REPO_PATH}")
+            "https://${CPANEL_DOMAIN}:2083/execute/VersionControl/update?repository_root=${ENCODED_PATH}")
           echo "$PULL"
+          PULL_STATUS=$(echo "$PULL" | grep "HTTP:" | cut -d: -f2)
+          if [ "$PULL_STATUS" != "200" ]; then
+            echo "Pull failed with status $PULL_STATUS"
+            exit 1
+          fi
+
+          # Wait for pull to complete before deploying
+          echo "Waiting for pull to complete..."
+          sleep 10
 
           # Step 2: run .cpanel.yml deployment tasks (copies files to public_html)
           echo "Step 2: Running deployment tasks..."
           DEPLOY=$(curl -s -w "\nHTTP:%{http_code}" \
             -X POST \
             -H "Authorization: cpanel ${CPANEL_USER}:${CPANEL_TOKEN}" \
-            "https://${CPANEL_DOMAIN}:2083/execute/VersionControlDeployment/create?repository_root=${CPANEL_REPO_PATH}")
+            "https://${CPANEL_DOMAIN}:2083/execute/VersionControlDeployment/create?repository_root=${ENCODED_PATH}")
           echo "$DEPLOY"
 
           HTTP_STATUS=$(echo "$DEPLOY" | grep "HTTP:" | cut -d: -f2)
@@ -43,3 +56,8 @@ jobs:
             echo "Deploy request failed with status $HTTP_STATUS"
             exit 1
           fi
+
+          # Wait for deployment tasks to finish
+          echo "Waiting for deployment to complete..."
+          sleep 15
+          echo "Done."
