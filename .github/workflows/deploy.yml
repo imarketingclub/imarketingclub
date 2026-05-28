@@ -52,5 +52,5 @@ jobs:
           echo "Resolving hostname..."
           host "$SERVER" || nslookup "$SERVER" || echo "DNS lookup failed for: $SERVER"
           lftp -u "$FTP_USERNAME","$FTP_PASSWORD" \
-            -e "set ssl:verify-certificate false; set ftp:ssl-allow yes; ls; bye" \
+            -e "set ssl:verify-certificate false; set ftp:ssl-allow yes; mirror --reverse --delete --transfer-all --exclude ^\.git/ --exclude ^\.github/ --exclude ^README\.md --exclude ^LICENSE . /; bye" \
             ftp://$SERVER
