@@ -43,4 +43,12 @@ jobs:
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
-        run: lftp -u "$FTP_USERNAME","$FTP_PASSWORD" -e "set ssl:verify-certificate false; set ftp:ssl-allow yes; mirror --reverse --delete --exclude ^\.git/ --exclude ^\.github/ --exclude ^README\.md --exclude ^LICENSE . $FTP_SERVER_DIR; bye" ftp://$FTP_SERVER
+        run: |
+          # Sanitise server value: strip protocol prefix, spaces, trailing slashes
+          SERVER=$(echo "$FTP_SERVER" | tr -d '[:space:]' | sed 's|^ftps\?://||' | sed 's|/$||')
+          echo "FTP_SERVER length: ${#SERVER}"
+          echo "Resolving hostname..."
+          host "$SERVER" || nslookup "$SERVER" || echo "DNS lookup failed for: $SERVER"
+          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" \
+            -e "set ssl:verify-certificate false; set ftp:ssl-allow yes; mirror --reverse --delete --exclude ^\.git/ --exclude ^\.github/ --exclude ^README\.md --exclude ^LICENSE . $FTP_SERVER_DIR; bye" \
+            ftp://$SERVER
