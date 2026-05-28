@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 $API_KEY     = 'shfgo3ma4dsb7umj76u0mvv8c6osqi30';
-$CAMPAIGN_ID = '490060604';
+$CAMPAIGN_ID = '7WryM';
 
 function gr($method, $endpoint, $payload = null) {
     global $API_KEY;
