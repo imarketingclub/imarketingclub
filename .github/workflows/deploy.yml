@@ -18,6 +18,20 @@ jobs:
       - name: Install sshpass
         run: sudo apt-get install -y sshpass
 
+      - name: SFTP probe
+        env:
+          SFTP_SERVER: ${{ secrets.FTP_SERVER }}
+          SFTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          SFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          SERVER=$(echo "$SFTP_SERVER" | tr -d '[:space:]' | sed 's|^ftps\?://||' | sed 's|/$||')
+          printf 'pwd\nls\nbye\n' > /tmp/probe.batch
+          sshpass -p "$SFTP_PASSWORD" sftp \
+            -o StrictHostKeyChecking=no \
+            -o UserKnownHostsFile=/dev/null \
+            -b /tmp/probe.batch \
+            "$SFTP_USERNAME@$SERVER"
+
       - name: Deploy via SFTP
         env:
           SFTP_SERVER: ${{ secrets.FTP_SERVER }}
