@@ -34,6 +34,15 @@ jobs:
           echo "Key line count: $(wc -l < ~/.ssh/id_rsa)"
           ssh-keygen -l -f ~/.ssh/id_rsa 2>&1 || echo "Key validation failed"
 
+          echo "=== SSH verbose auth test ==="
+          ssh -vvv \
+            -o StrictHostKeyChecking=no \
+            -o UserKnownHostsFile=/dev/null \
+            -o BatchMode=yes \
+            -i ~/.ssh/id_rsa \
+            "$SFTP_USERNAME@$SERVER" echo ok 2>&1 | grep -E "(debug1|Authentications|Permission|Offering|key|identity|user)" | head -40
+          echo "=== end auth test ==="
+
           BATCH=$(mktemp)
           {
             echo "cd $DIR"
