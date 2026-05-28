@@ -15,63 +15,45 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Deploy via SFTP
+      - name: Install lftp
+        run: sudo apt-get install -y lftp
+
+      - name: Deploy via FTP
         env:
-          SFTP_SERVER: ${{ secrets.FTP_SERVER }}
-          SFTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          SFTP_DIR: ${{ secrets.FTP_SERVER_DIR }}
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_SERVER_DIR: ${{ secrets.FTP_SERVER_DIR }}
         run: |
-          SERVER=$(echo "$SFTP_SERVER" | tr -d '[:space:]' | sed 's|^ftps\?://||' | sed 's|/$||')
-          DIR=$(echo "$SFTP_DIR" | tr -d '[:space:]' | sed 's|^/||' | sed 's|/$||')
+          SERVER=$(echo "$FTP_SERVER" | tr -d '[:space:]' | sed 's|^ftps\?://||' | sed 's|/$||')
+          DIR=$(echo "$FTP_SERVER_DIR" | tr -d '[:space:]' | sed 's|^/||' | sed 's|/$||')
 
-          # Write SSH key
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-
-          echo "Key header: $(head -1 ~/.ssh/id_rsa)"
-          echo "Key line count: $(wc -l < ~/.ssh/id_rsa)"
-          ssh-keygen -l -f ~/.ssh/id_rsa 2>&1 || echo "Key validation failed"
-
-          echo "=== SSH verbose auth test ==="
-          ssh -vvv \
-            -o StrictHostKeyChecking=no \
-            -o UserKnownHostsFile=/dev/null \
-            -o BatchMode=yes \
-            -o PubkeyAcceptedAlgorithms=ssh-rsa \
-            -o HostKeyAlgorithms=+ssh-rsa \
-            -i ~/.ssh/id_rsa \
-            "$SFTP_USERNAME@$SERVER" echo ok > /tmp/ssh_debug.txt 2>&1 || true
-          grep -iE "(offering|accepted|server accept|denied|login|user|pubkey|authenticat|signing)" /tmp/ssh_debug.txt | head -30
-          echo "=== end auth test ==="
-
-          BATCH=$(mktemp)
+          SCRIPT=$(mktemp)
           {
-            echo "cd $DIR"
+            echo "set ftp:ssl-allow no"
+            echo "set ftp:passive-mode true"
+            echo "set net:timeout 60"
+            echo "open -u \"$FTP_USERNAME\",\"$FTP_PASSWORD\" ftp://$SERVER"
             find . -type d \
               ! -path './.git*' \
               ! -path './.github*' \
               ! -name '.' \
               | while IFS= read -r d; do
-                echo "-mkdir ${d#./}"
+                echo "mkdir -p /$DIR/${d#./}"
               done
             find . -type f \
               ! -path './.git/*' \
               ! -path './.github/*' \
               ! -name '.gitignore' \
               | while IFS= read -r file; do
-                echo "put $file ${file#./}"
+                echo "put $file -o /$DIR/${file#./}"
               done
             echo "bye"
-          } > "$BATCH"
+          } > "$SCRIPT"
 
-          sftp -i ~/.ssh/id_rsa \
-            -o StrictHostKeyChecking=no \
-            -o UserKnownHostsFile=/dev/null \
-            -o PubkeyAcceptedAlgorithms=ssh-rsa \
-            -o HostKeyAlgorithms=+ssh-rsa \
-            -b "$BATCH" \
-            "$SFTP_USERNAME@$SERVER"
+          echo "--- script preview (first 20 lines) ---"
+          head -20 "$SCRIPT"
+          echo "----------------------------------------"
 
+          lftp -f "$SCRIPT"
           echo "Deploy complete."
