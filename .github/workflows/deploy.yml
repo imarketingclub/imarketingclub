@@ -33,6 +33,7 @@ jobs:
             echo "set ftp:ssl-allow no"
             echo "set ftp:passive-mode true"
             echo "set net:timeout 60"
+            echo "debug 3"
             echo "open -u \"$FTP_USERNAME\",\"$FTP_PASSWORD\" ftp://$SERVER"
             find . -type d \
               ! -path './.git*' \
