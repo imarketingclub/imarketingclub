@@ -33,16 +33,8 @@ jobs:
             echo "set ftp:ssl-allow no"
             echo "set ftp:passive-mode true"
             echo "set net:timeout 60"
-            echo "set cmd:fail-exit false"
             echo "debug 3"
             echo "open -u \"$FTP_USERNAME\",\"$FTP_PASSWORD\" ftp://$SERVER"
-            find . -type d \
-              ! -path './.git*' \
-              ! -path './.github*' \
-              ! -name '.' \
-              | while IFS= read -r d; do
-                echo "mkdir -p /$DIR/${d#./}"
-              done
             find . -type f \
               ! -path './.git/*' \
               ! -path './.github/*' \
