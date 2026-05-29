@@ -1030,6 +1030,7 @@ section { padding: 80px 5%; }
   border-bottom-left-radius: 3px;
 }
 .featured-card .tool-icon { font-size: 2.4rem; margin-bottom: 0.6rem; }
+.featured-card .tool-icon img { width: 80px; height: 80px; }
 .featured-card h3 {
   font-family: 'Playfair Display', serif;
   font-size: 1.5rem;
@@ -1093,6 +1094,7 @@ section { padding: 80px 5%; }
 .tool-card:hover::before { transform: scaleX(1); }
 .tool-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.08); transform: translateY(-3px); border-color: transparent; }
 .tool-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+.tool-icon img { display: block; width: 80px; height: 80px; border-radius: 10px; }
 .tool-card h3 {
   font-family: 'Playfair Display', serif;
   font-size: 1.1rem;
