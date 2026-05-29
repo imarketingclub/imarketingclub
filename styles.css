@@ -2281,6 +2281,21 @@ body.join-page {
 /* GetResponse widget overrides */
 .gr-form-wrap { margin-bottom: 0.4rem; }
 .gr-form-wrap getresponse-form { display: block; width: 100%; }
+
+/* Skeleton shown while the GR script is still loading; :not(:defined) matches any
+   custom element that hasn't been registered yet, and is auto-removed once the
+   script runs and defines <getresponse-form>. */
+.gr-form-wrap getresponse-form:not(:defined) {
+  min-height: 210px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #f0ede8 25%, #e8e4de 50%, #f0ede8 75%);
+  background-size: 200% 100%;
+  animation: gr-shimmer 1.4s ease-in-out infinite;
+}
+@keyframes gr-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
 getresponse-form input[type="text"],
 getresponse-form input[type="email"] {
   width: 100% !important; padding: 12px 14px !important;
