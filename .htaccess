@@ -6,3 +6,7 @@
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
 </IfModule>
+
+<FilesMatch "\.xml$">
+  Header set Content-Type "application/xml; charset=utf-8"
+</FilesMatch>
