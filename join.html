@@ -28,9 +28,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://imarketingclub.com/join.html">
 <title>Free PDF: 10 Free Affiliate Marketing Tools to Start With — iMarketing Club</title>
-<!-- Preconnect to GetResponse servers early so widget loads faster once triggered -->
-<link rel="preconnect" href="https://app.getresponse.com" crossorigin>
+<!-- Preconnect to GetResponse servers; no crossorigin on app.getresponse.com because the
+     widget script is a plain <script src> (not CORS), so they must share the same connection pool -->
+<link rel="preconnect" href="https://app.getresponse.com">
 <link rel="preconnect" href="https://an.gr-wcon.com" crossorigin>
+<!-- Preload the widget script so the browser fetches it at the start of page load rather
+     than waiting until the <script> tag is parsed at the bottom of body -->
+<link rel="preload" as="script" href="https://app.getresponse.com/view_webform_v2.js?u=80cd3aa0-897c-4943-8d39-ce6eacfd855a&webforms_id=c7a1415d-c2db-416b-ad49-c914f3cf29b3">
 <link rel="preload" as="style" fetchpriority="high" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;0,900;1,600;1,700&family=DM+Sans:wght@300;400;500;600&display=swap&font-display=swap">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;0,900;1,600;1,700&family=DM+Sans:wght@300;400;500;600&display=swap&font-display=swap"></noscript>
 
