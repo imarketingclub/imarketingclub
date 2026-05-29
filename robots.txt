@@ -77,16 +77,19 @@ User-agent: Diffbot
 Allow: /
 
 # --------------------------------------------------
-# BAD BOTS - Disallow All
-# Please respect this robots.txt and do not index
-# this site. You are not welcome here.
+# SEO TOOL CRAWLERS - Full Access
+# (Site reviews these tools — blocking them is counterproductive)
 # --------------------------------------------------
 
 User-agent: AhrefsBot
-Disallow: /
+Allow: /
 
 User-agent: SemrushBot
-Disallow: /
+Allow: /
+
+# --------------------------------------------------
+# BAD BOTS - Disallow All
+# --------------------------------------------------
 
 User-agent: MJ12bot
 Disallow: /
