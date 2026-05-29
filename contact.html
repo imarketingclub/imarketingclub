@@ -28,6 +28,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap"></noscript>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-TDM2QFDQGJ"></script>
@@ -91,6 +92,9 @@
       <!-- SETUP NOTICE: remove this block once Formspree is configured -->
 
       <form id="contactForm" novalidate>
+        <!-- Honeypot: hidden from humans, bots fill it in -->
+        <input type="text" name="website" tabindex="-1" autocomplete="off"
+          style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" aria-hidden="true">
 
         <div class="form-row">
           <div class="form-group">
@@ -135,9 +139,14 @@
           <label for="newsletter-optin">Also send me Jay's occasional emails on what's working in digital marketing. No spam, ever.</label>
         </div>
 
+        <!-- Cloudflare Turnstile — replace data-sitekey with your real key from dash.cloudflare.com/turnstile -->
+        <!-- Test key (always passes, for dev): 1x00000000000000000000AA -->
+        <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="light" style="margin-bottom:1rem"></div>
+        <p class="field-error" id="turnstileErr">Please complete the CAPTCHA check above.</p>
+
         <button type="submit" class="submit-btn" id="submitBtn">Send Message →</button>
         <p class="form-note">Your details will only be used to respond to your message. No spam. Ever.</p>
-        <div class="error-msg" id="errorMsg">Something went wrong sending your message. Please try again, or email jay@imarketingclub.com directly.</div>
+        <div class="error-msg" id="errorMsg">Something went wrong sending your message. Please try again, or email jay&#64;imarketingclub&#46;com directly.</div>
       </form>
 
       <div class="success-msg" id="successMsg">
@@ -230,6 +239,24 @@ form.addEventListener('submit', async function(e) {
 
   if (!valid) return;
 
+  // Honeypot check — bots fill this field, humans don't
+  const honeypot = form.querySelector('[name="website"]');
+  if (honeypot && honeypot.value) {
+    form.style.display = 'none';
+    document.getElementById('successMsg').classList.add('show');
+    return;
+  }
+
+  // Turnstile check — only enforce if the widget loaded
+  const tsWidget = form.querySelector('.cf-turnstile');
+  const tsToken  = form.querySelector('[name="cf-turnstile-response"]');
+  const tsErr    = document.getElementById('turnstileErr');
+  if (tsWidget && (!tsToken || !tsToken.value)) {
+    tsErr.classList.add('show');
+    return;
+  }
+  if (tsErr) tsErr.classList.remove('show');
+
   const btn = document.getElementById('submitBtn');
   const errMsg = document.getElementById('errorMsg');
   btn.disabled = true;
@@ -239,8 +266,6 @@ form.addEventListener('submit', async function(e) {
   // Build full name for submission
   const fullName = fn.value.trim() + ' ' + document.getElementById('lastName').value.trim();
 
-  // Submit to Formspree via fetch
-  // Replace YOUR_FORM_ID with your actual Formspree form ID
   const FORMSPREE_ID = 'xpqnyeaj';
 
   try {
@@ -248,13 +273,14 @@ form.addEventListener('submit', async function(e) {
       method: 'POST',
       headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name:             fullName,
-        email:            em.value.trim(),
-        topic:            sub.value,
-        message:          msg.value.trim(),
-        newsletter_optin: optin.checked ? 'yes' : 'no',
-        _subject:         '[iMarketing Club] ' + sub.value + ' — from ' + fullName,
-        _replyto:         em.value.trim()
+        name:                    fullName,
+        email:                   em.value.trim(),
+        topic:                   sub.value,
+        message:                 msg.value.trim(),
+        newsletter_optin:        optin.checked ? 'yes' : 'no',
+        'cf-turnstile-response': tsToken ? tsToken.value : '',
+        _subject:                '[iMarketing Club] ' + sub.value + ' — from ' + fullName,
+        _replyto:                em.value.trim()
       })
     });
 
