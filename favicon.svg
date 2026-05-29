@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <linearGradient id="arc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <!-- White background -->
+  <rect width="32" height="32" rx="5" fill="#ffffff"/>
+  <!-- Circular arc sweep (top-left to bottom-right, open at top-right) -->
+  <path d="M 16 2 A 14 14 0 1 0 30 19" fill="none" stroke="url(#arc)" stroke-width="2.4" stroke-linecap="round"/>
+  <!-- Arrow tip at arc end -->
+  <polyline points="27,15 30,19 26,21" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- blue "i" -->
+  <circle cx="10" cy="9" r="1.5" fill="#3B82F6"/>
+  <rect x="8.5" y="12" width="3" height="12" rx="1" fill="#3B82F6"/>
+  <!-- dark "M" -->
+  <text x="14" y="25" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="14" fill="#0f172a">M</text>
+</svg>
