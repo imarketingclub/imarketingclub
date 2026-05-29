@@ -126,6 +126,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="dns-prefetch" href="https://img1.wsimg.com">
 <link rel="dns-prefetch" href="https://csp.secureserver.net">
+<link rel="preload" as="image" href="/jay-salton-opt-800.webp" fetchpriority="high">
 <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap"></noscript>
 
@@ -178,9 +179,18 @@
     </div>
     <div class="hero-image-wrap">
       <picture>
-            <source srcset="jay-salton.webp" type="image/webp">
-            <img src="jay-salton-opt.jpg" alt="Jay Salton — iMarketing Club digital marketing expert" width="600" height="800" fetchpriority="high" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:6px;">
-          </picture>
+        <source type="image/webp"
+                srcset="/jay-salton-opt-400.webp 400w, /jay-salton-opt-800.webp 800w"
+                sizes="(max-width: 768px) 100vw, 800px">
+        <img src="/jay-salton-opt-800.jpg"
+             srcset="/jay-salton-opt-400.jpg 400w, /jay-salton-opt-800.jpg 800w"
+             sizes="(max-width: 768px) 100vw, 800px"
+             alt="Jay Salton — iMarketing Club digital marketing expert"
+             width="800" height="1065"
+             fetchpriority="high"
+             decoding="async"
+             style="width:100%;height:100%;object-fit:cover;display:block;border-radius:6px;">
+      </picture>
     </div>
   </div>
 </section>
