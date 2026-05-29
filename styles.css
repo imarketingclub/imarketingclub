@@ -252,10 +252,15 @@ section { padding: 80px 5%; }
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-d);
   margin-bottom: 0.8rem;
   display: block;
 }
+/* Restore vivid gold where section-labels sit on dark backgrounds */
+.hero .section-label,
+.page-hero .section-label,
+.beliefs .section-label,
+.optin-strip .section-label { color: var(--gold); }
 
 /* ── KICKER / EYEBROW BADGES ──────────────────────────────── */
 .kicker,
