@@ -145,7 +145,7 @@
 
         <button type="submit" class="submit-btn" id="submitBtn">Send Message →</button>
         <p class="form-note">Your details will only be used to respond to your message. No spam. Ever.</p>
-        <div class="error-msg" id="errorMsg">Something went wrong sending your message. Please try again, or email jay&#64;imarketingclub&#46;com directly.</div>
+        <div class="error-msg" id="errorMsg">Something went wrong sending your message. Please try again, or email <span class="email" data-user="jay" data-domain="imarketingclub.com"></span> directly.</div>
       </form>
 
       <div class="success-msg" id="successMsg">
@@ -320,5 +320,11 @@ form.addEventListener('submit', async function(e) {
 });
 </script>
 <script src="/js/main.js" defer></script>
+<script>
+  document.querySelectorAll('.email').forEach(function(e) {
+    var u = e.dataset.user, d = e.dataset.domain;
+    e.innerHTML = '<a href="mailto:' + u + '@' + d + '">' + u + '@' + d + '</a>';
+  });
+</script>
 </body>
 </html>
