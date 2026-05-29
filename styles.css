@@ -2738,3 +2738,23 @@ a {
   color: #3282e6;
   text-decoration: none;
 }
+/* ── Post share buttons ───────────────────────────────────── */
+.post-share { display: flex; align-items: center; gap: 0.6rem; margin: 2.5rem 0 0; flex-wrap: wrap; }
+.share-label { font-size: 0.75rem; color: var(--mid); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; margin-right: 0.2rem; }
+.share-btn { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.78rem; font-weight: 500; padding: 0.32rem 0.85rem; border-radius: 3px; text-decoration: none; line-height: 1; transition: opacity 0.15s; white-space: nowrap; }
+.share-btn:hover { opacity: 0.8; }
+.share-x  { background: #000; color: #fff; }
+.share-li { background: #0077b5; color: #fff; }
+.share-rd { background: #ff4500; color: #fff; }
+
+/* ── Post opt-in CTA ─────────────────────────────────────── */
+.post-optin { background: var(--ink); border-radius: 6px; padding: 2.5rem 2rem; margin: 3rem 0; max-width: 680px; text-align: center; }
+.post-optin-kicker { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+.post-optin h3 { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 700; color: #fff; margin-bottom: 0.7rem; line-height: 1.25; }
+.post-optin p { font-size: 0.93rem; color: rgba(255,255,255,0.72); margin-bottom: 1.4rem; line-height: 1.65; }
+.post-optin .btn--gold { background: var(--gold); color: var(--ink); border-radius: 3px; padding: 0.72rem 1.8rem; font-weight: 600; text-decoration: none; display: inline-block; font-size: 0.95rem; }
+.post-optin .btn--gold:hover { background: var(--gold-light); }
+
+/* ── Author name link ────────────────────────────────────── */
+.author-card-info .author-name a { color: inherit; text-decoration: none; }
+.author-card-info .author-name a:hover { color: var(--gold); }
