@@ -32,6 +32,30 @@
 <meta name="twitter:image" content="https://imarketingclub.com/img/imarketing-club-social-banner.jpg">
 <meta name="twitter:image:alt" content="iMarketing Club – Smart Marketing for the Digital Age">
 
+<!-- Organization + WebSite @graph — entity linking for Knowledge Graph -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://imarketingclub.com/#org",
+      "name": "iMarketing Club",
+      "url": "https://imarketingclub.com",
+      "logo": "https://imarketingclub.com/img/imarketing-club-social-banner.jpg",
+      "founder": {"@id": "https://imarketingclub.com/about.html#jay"}
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://imarketingclub.com/#website",
+      "url": "https://imarketingclub.com",
+      "name": "iMarketing Club",
+      "publisher": {"@id": "https://imarketingclub.com/#org"}
+    }
+  ]
+}
+</script>
+
 <!-- WebSite schema -->
 <script type="application/ld+json">
 {
