@@ -1824,8 +1824,8 @@ footer {
   .transparency-grid { grid-template-columns: 1fr; }
   .btn-outline-gold { margin-left: 0; margin-top: 0.8rem; }
   .ft-hero-inner { grid-template-columns: 1fr; min-height: auto; padding-top: 50px; gap: 3rem; }
-  .hero-copy { padding-right: 0; order: 2; }
-  .hero-photo { order: 1; max-width: 340px; margin: 0 auto; }
+  .hero-copy { padding-right: 0; order: 1; }
+  .hero-photo { order: 2; max-width: 340px; margin: 0 auto; }
   .hero-headline { font-size: clamp(2rem, 7vw, 3rem); }
   .offers-grid { grid-template-columns: 1fr; }
   .offer-card.featured { margin-top: 1.5rem; }
