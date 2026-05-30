@@ -2278,42 +2278,31 @@ body.join-page {
 }
 .cta-repeat-btn:hover { background: var(--ember-d); transform: translateY(-2px); }
 
-/* GetResponse widget overrides */
+/* Native opt-in form (replaces GetResponse widget embed) */
 .gr-form-wrap { margin-bottom: 0.4rem; }
-.gr-form-wrap getresponse-form { display: block; width: 100%; }
-
-/* Skeleton shown while the GR script is still loading; :not(:defined) matches any
-   custom element that hasn't been registered yet, and is auto-removed once the
-   script runs and defines <getresponse-form>. */
-.gr-form-wrap getresponse-form:not(:defined) {
-  min-height: 210px;
-  border-radius: 3px;
-  background: linear-gradient(90deg, #f0ede8 25%, #e8e4de 50%, #f0ede8 75%);
-  background-size: 200% 100%;
-  animation: gr-shimmer 1.4s ease-in-out infinite;
+.gr-native-form { display: flex; flex-direction: column; gap: 0; }
+.gr-native-form input[type="text"],
+.gr-native-form input[type="email"] {
+  width: 100%; padding: 12px 14px;
+  border: 1.5px solid var(--border); border-radius: 3px;
+  font-family: 'DM Sans', sans-serif; font-size: 0.95rem;
+  color: var(--ink); background: #fff;
+  margin-bottom: 0.9rem; box-sizing: border-box;
 }
-@keyframes gr-shimmer {
-  0%   { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+.gr-native-form input:focus {
+  outline: 2px solid var(--ember); outline-offset: 1px;
 }
-getresponse-form input[type="text"],
-getresponse-form input[type="email"] {
-  width: 100% !important; padding: 12px 14px !important;
-  border: 1.5px solid var(--border) !important; border-radius: 3px !important;
-  font-family: 'DM Sans', sans-serif !important; font-size: 0.95rem !important;
-  color: var(--ink) !important; background: #fff !important;
-  margin-bottom: 0.9rem !important; box-sizing: border-box !important;
+.gr-native-form button[type="submit"] {
+  width: 100%; padding: 15px 20px;
+  background: var(--ember); color: #fff;
+  font-family: 'DM Sans', sans-serif; font-size: 0.92rem;
+  font-weight: 700; letter-spacing: 0.05em;
+  text-transform: uppercase; border: none;
+  border-radius: 3px; cursor: pointer;
+  box-shadow: 0 4px 20px rgba(168,79,20,0.35);
 }
-getresponse-form input[type="submit"],
-getresponse-form button[type="submit"] {
-  width: 100% !important; padding: 15px 20px !important;
-  background: var(--ember) !important; color: #fff !important;
-  font-family: 'DM Sans', sans-serif !important; font-size: 0.92rem !important;
-  font-weight: 700 !important; letter-spacing: 0.05em !important;
-  text-transform: uppercase !important; border: none !important;
-  border-radius: 3px !important; cursor: pointer !important;
-  box-shadow: 0 4px 20px rgba(168,79,20,0.35) !important;
-}
+.gr-native-form button[type="submit"]:hover { background: #c05a10; }
+.gr-native-form button[type="submit"]:active { transform: translateY(1px); }
 
 /* ── RESPONSIVE (join) ────────────────────────────────────── */
 @media (max-width: 840px) {

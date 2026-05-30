@@ -28,14 +28,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="canonical" href="https://imarketingclub.com/join.html">
 <title>Free PDF: 10 Free Affiliate Marketing Tools to Start With — iMarketing Club</title>
-<!-- Preconnect to GetResponse servers; no crossorigin on app.getresponse.com because the
-     widget script is a plain <script src> (not CORS), so they must share the same connection pool -->
-<link rel="preconnect" href="https://app.getresponse.com">
+<!-- GetResponse analytics only — no widget script needed; form is native HTML -->
 <link rel="preconnect" href="https://an.gr-wcon.com" crossorigin>
-<!-- Load the widget script async in <head> so it executes as soon as downloaded — potentially
-     while the body is still being parsed — rather than waiting until the full body is parsed.
-     This starts GR's internal form-config fetch earlier, which is the real bottleneck. -->
-<script async src="https://app.getresponse.com/view_webform_v2.js?u=80cd3aa0-897c-4943-8d39-ce6eacfd855a&webforms_id=c7a1415d-c2db-416b-ad49-c914f3cf29b3"></script>
 <link rel="preload" as="style" fetchpriority="high" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;0,900;1,600;1,700&family=DM+Sans:wght@300;400;500;600&display=swap&font-display=swap">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;0,900;1,600;1,700&family=DM+Sans:wght@300;400;500;600&display=swap&font-display=swap"></noscript>
 
@@ -167,7 +161,14 @@
       </p>
 
       <div class="gr-form-wrap">
-        <getresponse-form form-id="c7a1415d-c2db-416b-ad49-c914f3cf29b3" e="1"></getresponse-form>
+        <form class="gr-native-form" method="POST" action="https://app.getresponse.com/add_subscriber.html">
+          <input type="hidden" name="campaign_token" value="7WryM">
+          <input type="hidden" name="start_day" value="0">
+          <input type="hidden" name="thankyou_url" value="https://imarketingclub.com/welcome-imarketing-club.html">
+          <input type="text" name="first_name" placeholder="First name" autocomplete="given-name" aria-label="First name">
+          <input type="email" name="email" placeholder="Email address" autocomplete="email" aria-label="Email address" required>
+          <button type="submit">Send Me the Free PDF →</button>
+        </form>
       </div>
 
       <p class="privacy-note" style="margin-top:0.8rem;">
