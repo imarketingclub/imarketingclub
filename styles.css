@@ -503,7 +503,7 @@ section { padding: 80px 5%; }
 /* Hero photo (free-tools) */
 .hero-photo {
   position: relative;
-  align-self: flex-end;
+  align-self: center;
 }
 .hero-photo picture,
 .hero-photo img {
