@@ -305,6 +305,29 @@ document.querySelector('.cta-repeat-btn').addEventListener('click', function(e) 
   e.preventDefault();
   document.querySelector('.form-panel').scrollIntoView({ behavior: 'smooth', block: 'center' });
 });
+
+// Submit opt-in form via no-cors fetch (background POST to GR) then redirect ourselves,
+// bypassing GR's endpoint which returns 200 HTML instead of a redirect.
+document.querySelector('.gr-native-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var form = e.target;
+  var btn = form.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  var redirectUrl = form.querySelector('[name="thankyou_url"]').value;
+  var done = false;
+  function go() { if (!done) { done = true; window.location.href = redirectUrl; } }
+
+  // Safety net in case fetch stalls
+  setTimeout(go, 2500);
+
+  fetch(form.action, {
+    method: 'POST',
+    body: new URLSearchParams(new FormData(form)),
+    mode: 'no-cors'
+  }).then(go, go);
+});
 </script>
 <!-- GetResponse Analytics: deferred to bottom so it never blocks rendering -->
 <script async crossorigin="use-credentials" src="https://an.gr-wcon.com/script/80cd3aa0-897c-4943-8d39-ce6eacfd855a/ga.js"></script>
