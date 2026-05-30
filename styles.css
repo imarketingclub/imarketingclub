@@ -1815,6 +1815,7 @@ footer {
 }
 
 @media (max-width: 820px) {
+  .hero { padding: 40px 5% 60px; }
   .hero-grid { grid-template-columns: 1fr; gap: 0; }
   .hero-left { padding-bottom: 30px; }
   .hero-photo-wrap { display: none; }
