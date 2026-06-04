@@ -53,14 +53,6 @@
 
 <nav>
   <a class="nav-logo" href="/"><span class="nav-i">i</span><span>Marketing</span>Club</a>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="/">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="tools.html">Join Free</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="contact.html" class="active">Contact</a></li>
-  </ul>
-  <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
 </nav>
 
 <main id="main-content">
@@ -80,7 +72,7 @@
       <p>There&#8217;s no team of virtual assistants filtering your messages. It&#8217;s just me. So what you write, I&#8217;ll actually read.</p>
       <p>If you&#8217;re looking for the fastest way to get answers about building an online business with AI, the best place is actually the iMarketing Club community — where you can ask questions, share progress, and get real-time feedback from other members.</p>
       <div style="margin:1.25rem 0;">
-        <a href="tools.html" class="btn btn--secondary">Join the Community Free &rarr;</a>
+        <a href="https://www.skool.com/imarketing-club-3803" class="btn btn--secondary" target="_blank" rel="noopener noreferrer">Join the Community Free &rarr;</a>
       </div>
       <div class="contact-detail">
         <span class="icon">&#9203;</span>
@@ -166,14 +158,16 @@
 </section>
 
 </main>
+
+<div style="text-align:center;padding:2rem 1rem;">
+  <a href="/" class="btn btn--secondary">&larr; Return to Home</a>
+</div>
+
 <footer>
   <div class="footer-top">
     <div class="footer-logo">iMarketingClub</div>
     <nav class="footer-nav" aria-label="Footer navigation">
       <a href="/">Home</a>
-      <a href="/about.html">About</a>
-      <a href="/tools.html">Join Free</a>
-      <a href="/blog.html">Blog</a>
       <a href="/contact.html">Contact</a>
       <a href="/privacy-policy.html">Privacy</a>
       <a href="/terms-of-service.html">Terms</a>
@@ -186,8 +180,6 @@
 </footer>
 
 <script>
-function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
-
 const form = document.getElementById('contactForm');
 
 form.addEventListener('submit', async function(e) {

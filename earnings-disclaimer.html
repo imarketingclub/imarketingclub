@@ -57,16 +57,6 @@
 <a href="#main-content" class="skip-to-main">Skip to main content</a>
 <nav>
   <a class="nav-logo" href="/"><span class="nav-i">i</span><span>Marketing</span>Club</a>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="/">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="tools.html">Join Free</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  <div class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks" role="button" tabindex="0">
-    <span></span><span></span><span></span>
-  </div>
 </nav>
 
 <main id="main-content">
@@ -118,14 +108,15 @@
 
 </main>
 
+<div style="text-align:center;padding:2rem 1rem;">
+  <a href="/" class="btn btn--secondary">&larr; Return to Home</a>
+</div>
+
 <footer>
   <div class="footer-top">
     <div class="footer-logo">iMarketingClub</div>
     <nav class="footer-nav" aria-label="Footer navigation">
       <a href="/">Home</a>
-      <a href="/about.html">About</a>
-      <a href="/tools.html">Join Free</a>
-      <a href="/blog.html">Blog</a>
       <a href="/contact.html">Contact</a>
       <a href="/privacy-policy.html">Privacy</a>
       <a href="/terms-of-service.html">Terms</a>
@@ -133,29 +124,13 @@
       <a href="/earnings-disclaimer.html">Earnings</a>
     </nav>
   </div>
-  <div class="footer-bottom">© 2025 iMarketing Club · Jay Salton · All rights reserved.</div>
+  <div class="footer-bottom">&copy; 2026 iMarketing Club &middot; Jay Salton &middot; All rights reserved.</div>
   <!-- FIX 7: GoDaddy seal script now uses defer to prevent main-thread blocking -->
   <span id="siteseal">
     <script defer type="text/javascript" src="https://seal.godaddy.com/getSealBasic?sealID=ItaDdGLXZdPBQNBent8pvA3FScbngRLAjUi3Ddebyxu7m8uQiKgfgrzHtWXS"></script>
   </span>
 </footer>
 
-<!-- FIX 8: Inline script moved to bottom and uses event listeners instead of inline onclick,
-     preventing forced reflow and reducing main-thread long tasks -->
-<script>
-  (function() {
-    var btn = document.getElementById('hamburgerBtn');
-    var nav = document.getElementById('navLinks');
-    function toggleNav() {
-      var isOpen = nav.classList.toggle('open');
-      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    }
-    btn.addEventListener('click', toggleNav);
-    btn.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleNav(); }
-    });
-  })();
-</script>
 <script src="/js/main.js" defer></script>
 </body>
 </html>
